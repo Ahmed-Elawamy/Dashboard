@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 
 const initialSlots = {
-    SAT: ["10:30 ص", "12:00 م", "03:00 م"],
-    SUN: ["11:00 ص", "01:00 م"],
-    MON: ["12:30 م", "04:00 م"],
+    SAT: ["10:30 PM", "12:00 PM", "03:00 PM"],
+    SUN: ["11:00 AM", "01:00 PM"],
+    MON: ["12:30 PM", "04:00 PM"],
     TUE: [],
-    WED: ["10:30 ص"],
-    THU: ["11:30 ص", "01:30 م"],
-    FRI: ["02:00 م"],
+    WED: ["10:30 AM"],
+    THU: ["11:30 AM", "01:30 PM"],
+    FRI: ["02:00 PM"],
 };
 
 const days = ["SAT", "SUN", "MON", "TUE", "WED", "THU", "FRI"];
@@ -61,7 +61,7 @@ const DoctorBookingSlots = () => {
                     type="text"
                     value={newSlot}
                     onChange={(e) => setNewSlot(e.target.value)}
-                    placeholder="مثال: 10:30 ص"
+                    placeholder="PMثال: 10:30 AM"
                     className="border rounded px-4 py-2 w-full sm:w-auto"
                 />
 

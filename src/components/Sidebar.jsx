@@ -6,7 +6,6 @@ import { FaCalendarAlt, FaComments, FaUser, FaClock } from "react-icons/fa";
 const Sidebar = ({ userType }) => {
     const basePath = userType === "admin" ? "/admin" : "/doctor";
 
-    // تنسيق الروابط حسب الحالة النشطة
     const linkClass = ({ isActive }) =>
         `flex items-center gap-3 px-4 py-3 transition-all duration-200 rounded-r-lg border-l-4 ${
             isActive
