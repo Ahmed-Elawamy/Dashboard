@@ -1,0 +1,52 @@
+{
+    "students": [
+        {
+            "id": 1,
+            "name": "Ahmed Ali",
+            "email": "ahmed@example.com",
+            "courseId": 101,
+            "grade": 87,
+            "attendancePercentage": 92
+        },
+        {
+            "id": 2,
+            "name": "Mona Hassan",
+            "email": "mona@example.com",
+            "courseId": 102,
+            "grade": 95,
+            "attendancePercentage": 100
+        }
+    ],
+    "courses": [
+        {
+            "id": 101,
+            "name": "Math 101",
+            "teacher": "Dr. Samir",
+            "studentsCount": 35
+        },
+        {
+            "id": 102,
+            "name": "Physics 101",
+            "teacher": "Dr. Khaled",
+            "studentsCount": 40
+        }
+    ],
+    "grades": [
+        { "studentId": 1, "courseId": 101, "grade": 87 },
+        { "studentId": 2, "courseId": 102, "grade": 95 }
+    ],
+    "attendance": [
+        {
+            "studentId": 1,
+            "courseId": 101,
+            "date": "2025-12-01",
+            "status": "present"
+        },
+        {
+            "studentId": 2,
+            "courseId": 102,
+            "date": "2025-12-01",
+            "status": "absent"
+        }
+    ]
+}

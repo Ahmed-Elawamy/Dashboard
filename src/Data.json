@@ -1,0 +1,62 @@
+[
+    {
+        "id": "STU001",
+        "initials": "EW",
+        "name": "Emma Wilson",
+        "email": "emma.w@school.edu",
+        "rollNo": "STU001",
+        "class": "Grade 10-A",
+        "department": "Science",
+        "status": "Active",
+        "phone": "+1-234-567-8901",
+        "dateOfBirth": "2008-05-15",
+        "address": "123 Main St, City",
+        "gpa": 3.8,
+        "attendanceRate": "94%",
+        "actions": ""
+    },
+    {
+        "id": "STU002",
+        "initials": "MC",
+        "name": "Michael Chen",
+        "email": "michael.c@school.edu",
+        "rollNo": "STU002",
+        "class": "Grade 11-B",
+        "department": "Commerce",
+        "status": "Active",
+        "actions": ""
+    },
+    {
+        "id": "STU003",
+        "initials": "SJ",
+        "name": "Sarah Johnson",
+        "email": "sarah.j@school.edu",
+        "rollNo": "STU003",
+        "class": "Grade 12-A",
+        "department": "Engineering",
+        "status": "Inactive",
+        "actions": ""
+    },
+    {
+        "id": "STU004",
+        "initials": "JB",
+        "name": "James Brown",
+        "email": "james.b@school.edu",
+        "rollNo": "STU004",
+        "class": "Grade 10-B",
+        "department": "Arts",
+        "status": "Active",
+        "actions": ""
+    },
+    {
+        "id": "STU005",
+        "initials": "ED",
+        "name": "Emily Davis",
+        "email": "emily.d@school.edu",
+        "rollNo": "STU005",
+        "class": "Grade 11-A",
+        "department": "Science",
+        "status": "Inactive",
+        "actions": ""
+    }
+]
