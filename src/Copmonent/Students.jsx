@@ -5,8 +5,8 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import Box from "@mui/material/Box";
 
 // Component
-import TableOfStudents from "./TableOfStudents";
-import StudentDialog from "./StudentDialog";
+import TableOfStudents from "./TableOfStudents.jsx";
+import StudentDialog from "./StudentDialog.jsx";
 
 import studentData from "../Data.json";
 

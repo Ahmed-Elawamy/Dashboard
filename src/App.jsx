@@ -1,5 +1,5 @@
 import "./App.css";
-import Sidebar from "./pages/Sidebar";
+import Sidebar from "./pages/Sidebar.jsx";
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "./Copmonent/Dashboard";
 import Students from "./Copmonent/Students";
