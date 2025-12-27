@@ -1,52 +1,37 @@
 import * as React from "react";
-import { Typography, Container } from "@mui/material";
-import Button from "@mui/material/Button";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import Box from "@mui/material/Box";
-import { Search as SearchIcon } from "@mui/icons-material";
+import {
+    Typography,
+    Container,
+    Box,
+    Grid,
+    IconButton,
+    Button,
+    Avatar,
+    Card,
+    CardHeader,
+    CardActions,
+    Modal,
+    Backdrop,
+    Fade,
+    Stack,
+} from "@mui/material";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+
+import {
+    AddOutlined as AddOutlinedIcon,
+    MenuBook as MenuBookIcon,
+    AccessTimeOutlined as AccessTimeOutlinedIcon,
+    GroupOutlined as GroupOutlinedIcon,
+} from "@mui/icons-material";
 import { styled } from "@mui/material";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
 import InputBase from "@mui/material/InputBase";
-
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardActions from "@mui/material/CardActions";
-
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-
-import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
-import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
-
 import theData from "../../coursesData.json";
-
-import { Grid } from "@mui/material";
-
-import { Modal, Backdrop, Fade } from "@mui/material";
 import FormDialog from "./FormDialog.jsx";
-const ExpandMore = styled((props) => {
-    const { expand, ...other } = props;
-    return <IconButton {...other} />;
-})(({ theme }) => ({
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-        duration: theme.transitions.duration.shortest,
-    }),
-    variants: [
-        {
-            props: ({ expand }) => !expand,
-            style: {
-                transform: "rotate(0deg)",
-            },
-        },
-        {
-            props: ({ expand }) => !!expand,
-            style: {
-                transform: "rotate(180deg)",
-            },
-        },
-    ],
-}));
+
+// ===== Styled Search =====
 const Search = styled("div")(({ theme }) => ({
     borderRadius: theme.shape.borderRadius,
     backgroundColor: "#f3f3f5",
@@ -58,9 +43,7 @@ const Search = styled("div")(({ theme }) => ({
     display: "flex",
     justifyContent: "flex-start",
     alignItems: "center",
-    "&:hover": {
-        backgroundColor: "#ffff",
-    },
+    "&:hover": { backgroundColor: "#ffff" },
     marginRight: theme.spacing(2),
     marginLeft: 0,
     [theme.breakpoints.up("sm")]: {
@@ -91,6 +74,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         },
     },
 }));
+
 function Courses() {
     const [infoCourses, setInfoCourses] = React.useState({
         id: "",
@@ -111,7 +95,11 @@ function Courses() {
     const [editStudentData, setEditStudentData] = React.useState({});
     const [mode, setMode] = React.useState("add"); // add | edit
 
-    const filterdCourseSearch = React.useMemo(() => {
+    const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
+    const [courseToDelete, setCourseToDelete] = React.useState(null);
+
+    // ===== Filtered Courses =====
+    const filteredCourses = React.useMemo(() => {
         const searchLower = searchText.toLowerCase();
         return coursesData.filter((c) => {
             return (
@@ -122,22 +110,36 @@ function Courses() {
         });
     }, [searchText, coursesData]);
 
-    const handleShow = (e) => {
-        setEditStudentData(e);
+    // ===== Handlers =====
+    const handleShow = (course) => {
+        setEditStudentData(course);
         setOpenDialog(true);
     };
-    const handleManage = (e) => {
+
+    const handleManage = (course) => {
         setMode("edit");
-        setEditStudentData(e);
+        setEditStudentData(course);
         setDialogForm(true);
     };
-    const handleDelete = (e) => {
-        const updated = coursesData.filter((c) => {
-            return c.id !== e.id;
-        });
-        setCoursesData(updated);
+
+    const handleDeleteClick = (course) => {
+        setCourseToDelete(course);
+        setDeleteDialogOpen(true);
     };
 
+    const handleDeleteConfirm = () => {
+        const updated = coursesData.filter((c) => c.id !== courseToDelete.id);
+        setCoursesData(updated);
+        setDeleteDialogOpen(false);
+        setCourseToDelete(null);
+    };
+
+    const handleDeleteCancel = () => {
+        setDeleteDialogOpen(false);
+        setCourseToDelete(null);
+    };
+
+    // ===== Render =====
     return (
         <Container maxWidth="lg" sx={{ pt: 5 }}>
             <div
@@ -164,7 +166,6 @@ function Courses() {
                     </Typography>
                 </div>
                 <Button
-                    // onClick={handleAdd}
                     onClick={() => setDialogForm(true)}
                     variant="contained"
                     startIcon={<AddOutlinedIcon />}
@@ -181,7 +182,7 @@ function Courses() {
 
             <Search sx={{ background: "white", position: "relative" }}>
                 <SearchIconWrapper>
-                    <SearchIcon />
+                    <AddOutlinedIcon /> {/* or SearchIcon */}
                 </SearchIconWrapper>
                 <StyledInputBase
                     style={{ width: "100%" }}
@@ -196,233 +197,206 @@ function Courses() {
                 <Grid
                     container
                     spacing={2}
-                    sx={{
-                        // display: "grid",
-                        // gridTemplateColumns:
-                        //     "repeat(auto-fit, minmax(250px, 1fr))",
-                        // gap: "85px",
-                        // gap: "50px",
-                        // gap: "20px",
-                        display: "flex",
-                        justifyContent: "center",
-                    }}
+                    sx={{ display: "flex", justifyContent: "center" }}
                 >
-                    {filterdCourseSearch.map((course) => {
-                        return (
-                            <Grid
-                                container
-                                xs={12}
-                                sm={6}
-                                md={3}
-                                key={course.id}
+                    {filteredCourses.map((course) => (
+                        <Grid
+                            container
+                            xs={12}
+                            sm={6}
+                            md={3}
+                            key={course.id}
+                            sx={{ justifyContent: "center" }}
+                        >
+                            <Card
+                                sx={{
+                                    maxWidth: 345,
+                                    marginTop: "40px",
+                                    padding: "19px 11px",
+                                    borderRadius: "15px",
+                                    minWidth: "334px",
+                                    height: "90%",
+                                }}
                             >
-                                <Card
-                                    key={course.id}
-                                    sx={{
-                                        maxWidth: 345,
-                                        marginTop: "40px",
-                                        padding: "19px 11px",
-                                        borderRadius: "15px",
-                                        // minWidth: "334px",
-                                        height: " 90%",
+                                <CardHeader
+                                    sx={{ color: "black" }}
+                                    avatar={
+                                        <Avatar
+                                            sx={{ bgcolor: "#007fff" }}
+                                            aria-label="course"
+                                        >
+                                            <MenuBookIcon />
+                                        </Avatar>
+                                    }
+                                    action={
+                                        <div
+                                            style={{
+                                                background:
+                                                    course.status === "Active"
+                                                        ? "#070606ff"
+                                                        : "#f1f1f1",
+                                                color:
+                                                    course.status === "Active"
+                                                        ? "white"
+                                                        : "black",
+                                                width:
+                                                    course.status === "Active"
+                                                        ? "74px"
+                                                        : "106px",
+                                                fontSize: "16px",
+                                                height: "39px",
+                                                borderRadius: "20px",
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                            }}
+                                        >
+                                            {course.status}
+                                        </div>
+                                    }
+                                    title={course.name}
+                                    subheader={course.id}
+                                />
+                                <p
+                                    style={{
+                                        color: "#00000081",
+                                        textAlign: "center",
+                                        fontSize: "18px",
                                     }}
                                 >
-                                    <CardHeader
-                                        sx={{ color: "black" }}
-                                        avatar={
-                                            <Avatar
-                                                sx={{ bgcolor: "#007fff" }}
-                                                aria-label="recipe"
-                                            >
-                                                <MenuBookIcon />
-                                            </Avatar>
-                                        }
-                                        action={
-                                            <div
-                                                aria-label="settings"
-                                                style={{
-                                                    // background: "#070606ff",
-                                                    background:
-                                                        course.status ==
-                                                        "Active"
-                                                            ? "#070606ff"
-                                                            : "#f1f1f1",
-                                                    color:
-                                                        course.status ==
-                                                        "Active"
-                                                            ? "white"
-                                                            : "black",
-                                                    width:
-                                                        course.status ==
-                                                        "Active"
-                                                            ? "74px"
-                                                            : "106px",
-                                                    fontSize: "16px",
-                                                    height: "39px",
-                                                    borderRadius: "20px",
-                                                    display: "flex",
-                                                    justifyContent: "center",
-                                                    alignItems: "center",
-                                                }}
-                                            >
-                                                {course.status}
-                                            </div>
-                                        }
-                                        title={course.name}
-                                        subheader={course.id}
-                                    />
-                                    <p
-                                        style={{
-                                            color: "#00000081",
-                                            textAlign: "center",
+                                    {course.description}
+                                </p>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        gap: "10px",
+                                        color: "#00000081",
+                                    }}
+                                >
+                                    <GroupOutlinedIcon />{" "}
+                                    {course.students_enrolled} students enrolled
+                                </div>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        gap: "10px",
+                                        color: "#00000081",
+                                        marginTop: "12px",
+                                        marginBottom: "15px",
+                                    }}
+                                >
+                                    <AccessTimeOutlinedIcon />{" "}
+                                    {course.duration_weeks} weeks
+                                </div>
+                                <hr
+                                    style={{
+                                        borderStyle: "ridge",
+                                        borderColor: "none",
+                                        color: "#e5e5e5",
+                                    }}
+                                />
+                                <div style={{ color: "#776c6cff" }}>
+                                    Teacher
+                                </div>
+                                <p style={{ fontSize: "19px" }}>
+                                    {course.teacher}
+                                </p>
+                                <div
+                                    style={{
+                                        fontSize: "19px",
+                                        color: "#776c6cff",
+                                    }}
+                                >
+                                    Department
+                                </div>
+                                <div
+                                    style={{
+                                        border: "1px solid #cec9c9ff",
+                                        display: "block",
+                                        padding: "5px 10px",
+                                        borderRadius: "20px",
+                                        width: "fit-content",
+                                        margin: "9px 0",
+                                    }}
+                                >
+                                    {course.department}
+                                </div>
+
+                                <CardActions sx={{ justifyContent: "center" }}>
+                                    <IconButton
+                                        onClick={() => handleShow(course)}
+                                        sx={{
+                                            color: "black",
+                                            background: "white",
+                                            borderRadius: "14px",
+                                            padding: "10px 9px",
                                             fontSize: "18px",
-                                        }}
-                                    >
-                                        {course.description}
-                                    </p>
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            gap: "10px",
-                                            color: "#00000081",
-                                        }}
-                                    >
-                                        <GroupOutlinedIcon />
-                                        {course.students_enrolled} students
-                                        enrolled
-                                    </div>
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            gap: "10px",
-                                            color: "#00000081",
-                                            marginTop: "12px",
-                                            marginBottom: "15px",
-                                        }}
-                                    >
-                                        <AccessTimeOutlinedIcon />
-                                        {course.duration_weeks} weeks
-                                    </div>
-                                    <hr
-                                        style={{
-                                            borderStyle: "ridge",
-                                            borderColor: "none",
-                                            color: "#e5e5e5",
-                                        }}
-                                    />
-                                    <div style={{ color: "#776c6cff" }}>
-                                        Teacher{" "}
-                                    </div>
-                                    <p style={{ fontSize: "19px" }}>
-                                        {course.teacher}
-                                    </p>
-                                    <div
-                                        style={{
-                                            fontSize: "19px",
-                                            color: "#776c6cff",
-                                        }}
-                                    >
-                                        Department
-                                    </div>
-
-                                    <div
-                                        style={{
-                                            border: "1px solid #cec9c9ff",
-                                            display: "block",
-                                            padding: "5px 10px",
-                                            borderRadius: "20px",
-                                            width: "fit-content",
-                                            margin: "9px 0",
-                                        }}
-                                    >
-                                        {course.department}
-                                    </div>
-
-                                    <CardActions
-                                        sx={{ justifyContent: "center" }}
-                                    >
-                                        <IconButton
-                                            onClick={() => handleShow(course)}
-                                            sx={{
+                                            border: "1px solid #e5e5e5",
+                                            marginRight: "10px",
+                                            "&:hover": {
+                                                background:
+                                                    "#e5e5e5 !important",
                                                 color: "black",
-                                                background: "white",
-                                                borderRadius: "14px",
-                                                padding: "10px 9px",
-                                                fontSize: "18px",
-                                                border: "1px solid  #e5e5e5",
-                                                marginRight: "10px",
-                                                "&:hover": {
-                                                    // background:
-                                                    //     "#007fff !important",
-                                                    background:
-                                                        "#e5e5e5 !important",
-                                                    color: "black",
-                                                },
-                                            }}
-                                            aria-label="View Details"
-                                        >
-                                            View Details
-                                        </IconButton>
-                                        <IconButton
-                                            onClick={() => handleManage(course)}
-                                            sx={{
-                                                color: "black",
-                                                background: "white",
-                                                borderRadius: "14px",
-                                                padding: "10px 9px",
-                                                fontSize: "18px",
-                                                border: "1px solid rgb(206, 201, 201)",
-                                                "&:hover": {
-                                                    background:
-                                                        "#007fff !important",
-                                                    color: "white",
-                                                },
-                                            }}
-                                            aria-label="Manage"
-                                        >
-                                            Manage
-                                        </IconButton>
-                                        <IconButton
-                                            onClick={() => handleDelete(course)}
-                                            sx={{
-                                                color: "black",
-                                                background: "white",
-                                                borderRadius: "14px",
-                                                padding: "10px 9px",
-                                                fontSize: "18px",
-                                                border: "1px solid rgb(206, 201, 201)",
-                                                transition: "0.3s",
-
-                                                "&:hover": {
-                                                    background:
-                                                        "#d30808ff !important",
-                                                    color: "white",
-                                                },
-                                            }}
-                                            aria-label="Delete"
-                                        >
-                                            Delete
-                                        </IconButton>
-                                    </CardActions>
-                                </Card>
-                            </Grid>
-                        );
-                    })}
+                                            },
+                                        }}
+                                        aria-label="View Details"
+                                    >
+                                        View Details
+                                    </IconButton>
+                                    <IconButton
+                                        onClick={() => handleManage(course)}
+                                        sx={{
+                                            color: "black",
+                                            background: "white",
+                                            borderRadius: "14px",
+                                            padding: "10px 9px",
+                                            fontSize: "18px",
+                                            border: "1px solid rgb(206, 201, 201)",
+                                            "&:hover": {
+                                                background:
+                                                    "#007fff !important",
+                                                color: "white",
+                                            },
+                                        }}
+                                        aria-label="Manage"
+                                    >
+                                        Manage
+                                    </IconButton>
+                                    <IconButton
+                                        onClick={() =>
+                                            handleDeleteClick(course)
+                                        }
+                                        sx={{
+                                            color: "black",
+                                            background: "white",
+                                            borderRadius: "14px",
+                                            padding: "10px 9px",
+                                            fontSize: "18px",
+                                            border: "1px solid rgb(206, 201, 201)",
+                                            "&:hover": {
+                                                background:
+                                                    "#d30808ff !important",
+                                                color: "white",
+                                            },
+                                        }}
+                                        aria-label="Delete"
+                                    >
+                                        Delete
+                                    </IconButton>
+                                </CardActions>
+                            </Card>
+                        </Grid>
+                    ))}
                 </Grid>
             </Container>
 
+            {/* View Course Dialog */}
             <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
                 open={openDialog}
                 onClose={() => setOpenDialog(false)}
                 closeAfterTransition
                 slots={{ backdrop: Backdrop }}
-                slotProps={{
-                    backdrop: {
-                        timeout: 500,
-                    },
-                }}
+                slotProps={{ backdrop: { timeout: 500 } }}
             >
                 <Fade in={openDialog}>
                     <Box
@@ -433,24 +407,18 @@ function Courses() {
                             transform: "translate(-50%, -50%)",
                             width: 400,
                             bgcolor: "background.paper",
-                            border: "2px solid #000",
                             boxShadow: 24,
                             p: 4,
+                            borderRadius: 3,
                         }}
                     >
-                        <Typography
-                            id="transition-modal-title"
-                            variant="h6"
-                            component="h2"
-                            sx={{ mb: 2 }}
-                        >
-                            Student Information
+                        <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
+                            Course Information
                         </Typography>
-
                         {editStudentData ? (
                             <Box sx={{ mt: 2 }}>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
-                                    <strong>Course Name:</strong>
+                                    <strong>Course Name:</strong>{" "}
                                     {editStudentData.name}
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
@@ -466,7 +434,7 @@ function Courses() {
                                     {editStudentData.phone}
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
-                                    <strong>status:</strong>{" "}
+                                    <strong>Status:</strong>{" "}
                                     {editStudentData.status}
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
@@ -482,7 +450,7 @@ function Courses() {
                                     {editStudentData.teacher}
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
-                                    <strong>department:</strong>{" "}
+                                    <strong>Department:</strong>{" "}
                                     {editStudentData.department}
                                 </Typography>
                             </Box>
@@ -491,7 +459,6 @@ function Courses() {
                                 No Course data available.
                             </Typography>
                         )}
-
                         <Box
                             sx={{
                                 mt: 3,
@@ -504,9 +471,7 @@ function Courses() {
                                 variant="contained"
                                 sx={{
                                     backgroundColor: "#030213",
-                                    "&:hover": {
-                                        backgroundColor: "#000000",
-                                    },
+                                    "&:hover": { backgroundColor: "#000000" },
                                 }}
                             >
                                 Close
@@ -528,6 +493,34 @@ function Courses() {
                 setEditStudentData={setEditStudentData}
                 mode={mode}
             />
+
+            {/* Delete Confirmation Dialog */}
+            <Dialog
+                open={deleteDialogOpen}
+                onClose={handleDeleteCancel}
+                fullWidth
+                maxWidth="xs"
+            >
+                <DialogTitle>Delete Course</DialogTitle>
+                <DialogContent>
+                    <Typography>
+                        Are you sure you want to delete{" "}
+                        <strong>{courseToDelete?.name}</strong>?
+                    </Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDeleteCancel} variant="outlined">
+                        Cancel
+                    </Button>
+                    <Button
+                        onClick={handleDeleteConfirm}
+                        color="error"
+                        variant="contained"
+                    >
+                        Delete
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Container>
     );
 }

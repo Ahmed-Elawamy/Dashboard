@@ -293,7 +293,7 @@ function Attendance() {
                                 borderRadius: "10px",
                             }}
                         >
-                            Save Attendance
+                            Save
                         </Button>
                     </Box>
 

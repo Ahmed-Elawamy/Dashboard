@@ -12,8 +12,7 @@
         "dateOfBirth": "2008-05-15",
         "address": "123 Main St, City",
         "gpa": 3.8,
-        "attendanceRate": "94%",
-        "actions": ""
+        "attendanceRate": "94%"
     },
     {
         "id": "STU002",
@@ -23,8 +22,7 @@
         "rollNo": "STU002",
         "class": "Grade 11-B",
         "department": "Commerce",
-        "status": "Active",
-        "actions": ""
+        "status": "Active"
     },
     {
         "id": "STU003",
@@ -34,8 +32,7 @@
         "rollNo": "STU003",
         "class": "Grade 12-A",
         "department": "Engineering",
-        "status": "Inactive",
-        "actions": ""
+        "status": "Inactive"
     },
     {
         "id": "STU004",
@@ -45,8 +42,7 @@
         "rollNo": "STU004",
         "class": "Grade 10-B",
         "department": "Arts",
-        "status": "Active",
-        "actions": ""
+        "status": "Active"
     },
     {
         "id": "STU005",
@@ -56,7 +52,6 @@
         "rollNo": "STU005",
         "class": "Grade 11-A",
         "department": "Science",
-        "status": "Inactive",
-        "actions": ""
+        "status": "Inactive"
     }
 ]
