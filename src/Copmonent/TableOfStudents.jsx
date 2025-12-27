@@ -82,17 +82,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-const Transition = forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
 
 // ================ END Constants & Styles ================
 
-export default function TableOfStudents({
-    rows,
-    setRows,
-    onEdit,
-}) {
+export default function TableOfStudents({ rows, setRows, onEdit, isMobile }) {
     const [searchText, setSearchText] = React.useState("");
     const [open, setOpen] = React.useState(false);
     const [selectedStudent, setSelectedStudent] = React.useState(null);
@@ -120,127 +113,136 @@ export default function TableOfStudents({
             attendance: row.attendanceRate || "",
             // Add other fields if needed
         };
-        
+
         setSelectedStudent(modalData);
         setOpen(true);
     }, []);
 
     // Handler for deleting student
-    const deleteStd = React.useCallback((row) => {
-        if (window.confirm(`Are you sure you want to delete ${row.name}?`)) {
-            const filteredStd = rows.filter((r) => r.id !== row.id);
-            setRows(filteredStd);
-        }
-    }, [rows, setRows]);
+    const deleteStd = React.useCallback(
+        (row) => {
+            if (
+                window.confirm(`Are you sure you want to delete ${row.name}?`)
+            ) {
+                const filteredStd = rows.filter((r) => r.id !== row.id);
+                setRows(filteredStd);
+            }
+        },
+        [rows, setRows]
+    );
 
     // Columns definition
-    const columns = React.useMemo(() => [
-        {
-            field: "initials",
-            headerName: "Student",
-            width: 70,
-            renderCell: (params) => (
-                <div
-                    style={{
-                        borderRadius: "50%",
-                        textAlign: "center",
-                        width: "46px",
-                        background: "#ececf0",
-                        color: "black",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        height: "42px",
-                        margin: "3px 0",
-                    }}
-                >
-                    {params.row.initials}
-                </div>
-            ),
-        },
-        { field: "name", headerName: "Name", width: 170 },
-        { field: "email", headerName: "Email", width: 180 },
-        { field: "rollNo", headerName: "Roll No", width: 120 },
-        { field: "class", headerName: "Class", width: 130 },
-        { field: "department", headerName: "Department", width: 130 },
-        {
-            field: "status",
-            headerName: "Status",
-            width: 150,
-            renderCell: (params) => {
-                const status = params.row.status;
-                return (
+    const columns = React.useMemo(
+        () => [
+            {
+                field: "initials",
+                headerName: "Student",
+                width: 70,
+                renderCell: (params) => (
                     <div
                         style={{
-                            background: status === "Active" ? "#030213" : "#f2edee",
-                            color: status === "Active" ? "white" : "black",
-                            borderRadius: "7px",
-                            fontSize: "17px",
-                            width: "53%",
-                            height: "74%",
-                            margin: "6px 37px",
+                            borderRadius: "50%",
+                            textAlign: "center",
+                            width: "46px",
+                            background: "#ececf0",
+                            color: "black",
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
+                            height: "42px",
+                            margin: "3px 0",
                         }}
                     >
-                        {status}
+                        {params.row.initials}
                     </div>
-                );
+                ),
             },
-        },
-        {
-            field: "actions",
-            headerName: "Actions",
-            width: 120,
-            sortable: false,
-            filterable: false,
-            renderCell: (params) => {
-                const row = params.row;
-                return (
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            gap: "15px",
-                            marginTop: "10px",
-                            flexWrap: "nowrap",
-                            flexDirection: "row",
-                        }}
-                    >
-                        <EditOutlined
-                            onClick={() => onEdit(row)}
-                            style={{ 
-                                color: "#7a7a7aff", 
-                                cursor: "pointer",
-                                fontSize: "20px" 
+            { field: "name", headerName: "Name", width: 170 },
+            { field: "email", headerName: "Email", width: 180 },
+            { field: "rollNo", headerName: "Roll No", width: 120 },
+            { field: "class", headerName: "Class", width: 130 },
+            { field: "department", headerName: "Department", width: 130 },
+            {
+                field: "status",
+                headerName: "Status",
+                width: 150,
+                renderCell: (params) => {
+                    const status = params.row.status;
+                    return (
+                        <div
+                            style={{
+                                background:
+                                    status === "Active" ? "#030213" : "#f2edee",
+                                color: status === "Active" ? "white" : "black",
+                                borderRadius: "7px",
+                                fontSize: "17px",
+                                width: "53%",
+                                height: "74%",
+                                margin: "6px 37px",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
                             }}
-                            title="Edit"
-                        />
-                        <VisibilityOutlined
-                            onClick={() => showStd(row)}
-                            style={{ 
-                                color: "#7a7a7aff", 
-                                cursor: "pointer",
-                                fontSize: "20px" 
-                            }}
-                            title="View Details"
-                        />
-                        <DeleteOutlined
-                            onClick={() => deleteStd(row)}
-                            style={{ 
-                                color: "#f70c3bff", 
-                                cursor: "pointer",
-                                fontSize: "20px" 
-                            }}
-                            title="Delete"
-                        />
-                    </div>
-                );
+                        >
+                            {status}
+                        </div>
+                    );
+                },
             },
-        },
-    ], [onEdit, showStd, deleteStd]);
+            {
+                field: "actions",
+                headerName: "Actions",
+                width: 120,
+                sortable: false,
+                filterable: false,
+                renderCell: (params) => {
+                    const row = params.row;
+                    return (
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                gap: "15px",
+                                marginTop: "10px",
+                                flexWrap: "nowrap",
+                                flexDirection: "row",
+                            }}
+                        >
+                            <EditOutlined
+                                onClick={() => onEdit(row)}
+                                style={{
+                                    color: "#7a7a7aff",
+                                    cursor: "pointer",
+                                    fontSize: "20px",
+                                }}
+                                title="Edit"
+                            />
+                            <VisibilityOutlined
+                                onClick={() => showStd(row)}
+                                style={{
+                                    color: "#7a7a7aff",
+                                    cursor: "pointer",
+                                    fontSize: "20px",
+                                }}
+                                title="View Details"
+                            />
+                            <DeleteOutlined
+                                onClick={() => deleteStd(row)}
+                                style={{
+                                    color: "#f70c3bff",
+                                    cursor: "pointer",
+                                    fontSize: "20px",
+                                }}
+                                title="Delete"
+                            />
+                        </div>
+                    );
+                },
+            },
+        ],
+        [onEdit, showStd, deleteStd]
+    );
 
     // Filter rows based on search text
     const filteredRows = React.useMemo(() => {
@@ -255,25 +257,20 @@ export default function TableOfStudents({
     }, [rows, searchText]);
 
     return (
-        <div style={{ 
-            height: 400, 
-            width: "100%", 
-            marginTop: "50px",
-        }}>
-            <DataGrid
-                rows={filteredRows}
-                columns={columns}
-                // pageSizeOptions={[5, 10, 20]}
-                // initialState={{
-                //     pagination: {
-                //         paginationModel: { pageSize: 10 },
-                //     },
-                // }}
-                // experimentalFeatures={{ newEditingApi: true }}
-                // disableColumnMenu
-            />
-            
-            <Search>
+        <div
+            style={{
+                height: 400,
+                width: "100%",
+                marginTop: "50px",
+            }}
+        >
+            <DataGrid rows={filteredRows} columns={columns} />
+
+            <Search
+                sx={{
+                    width:"100%",
+                }}
+            >
                 <SearchIconWrapper>
                     <SearchIcon />
                 </SearchIconWrapper>
@@ -284,7 +281,7 @@ export default function TableOfStudents({
                     onChange={(e) => setSearchText(e.target.value)}
                 />
             </Search>
-            
+
             {/* Modal for showing student information */}
             <Modal
                 aria-labelledby="transition-modal-title"
@@ -309,41 +306,51 @@ export default function TableOfStudents({
                         >
                             Student Information
                         </Typography>
-                        
+
                         {selectedStudent ? (
                             <Box sx={{ mt: 2 }}>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
-                                    <strong>Full Name:</strong> {selectedStudent.name}
+                                    <strong>Full Name:</strong>{" "}
+                                    {selectedStudent.name}
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
-                                    <strong>Email:</strong> {selectedStudent.email}
+                                    <strong>Email:</strong>{" "}
+                                    {selectedStudent.email}
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
-                                    <strong>Roll Number:</strong> {selectedStudent.rollNumber}
+                                    <strong>Roll Number:</strong>{" "}
+                                    {selectedStudent.rollNumber}
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
-                                    <strong>Phone:</strong> {selectedStudent.phone}
+                                    <strong>Phone:</strong>{" "}
+                                    {selectedStudent.phone}
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
-                                    <strong>Date of Birth:</strong> {selectedStudent.birth}
+                                    <strong>Date of Birth:</strong>{" "}
+                                    {selectedStudent.birth}
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
-                                    <strong>Status:</strong> {selectedStudent.status}
+                                    <strong>Status:</strong>{" "}
+                                    {selectedStudent.status}
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
-                                    <strong>Address:</strong> {selectedStudent.address}
+                                    <strong>Address:</strong>{" "}
+                                    {selectedStudent.address}
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
-                                    <strong>Class:</strong> {selectedStudent.class}
+                                    <strong>Class:</strong>{" "}
+                                    {selectedStudent.class}
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
-                                    <strong>Department:</strong> {selectedStudent.department}
+                                    <strong>Department:</strong>{" "}
+                                    {selectedStudent.department}
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
                                     <strong>GPA:</strong> {selectedStudent.GPA}
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
-                                    <strong>Attendance Rate:</strong> {selectedStudent.attendance}%
+                                    <strong>Attendance Rate:</strong>{" "}
+                                    {selectedStudent.attendance}%
                                 </Typography>
                             </Box>
                         ) : (
@@ -351,16 +358,22 @@ export default function TableOfStudents({
                                 No student data available.
                             </Typography>
                         )}
-                        
-                        <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
-                            <Button 
-                                onClick={handleClose} 
+
+                        <Box
+                            sx={{
+                                mt: 3,
+                                display: "flex",
+                                justifyContent: "flex-end",
+                            }}
+                        >
+                            <Button
+                                onClick={handleClose}
                                 variant="contained"
-                                sx={{ 
-                                    backgroundColor: '#030213',
-                                    '&:hover': {
-                                        backgroundColor: '#000000',
-                                    }
+                                sx={{
+                                    backgroundColor: "#030213",
+                                    "&:hover": {
+                                        backgroundColor: "#000000",
+                                    },
                                 }}
                             >
                                 Close

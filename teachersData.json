@@ -1,0 +1,76 @@
+{
+    "metadata": {
+        "totalTeachers": 6,
+        "activeTeachers": 5,
+        "totalCourses": 19,
+        "averageExperience": 11.3
+    },
+    "teachers": [
+        {
+            "id": "DSA",
+            "name": "Dr. Sarah Anderson",
+            "email": "sarah.a@school.edu",
+            "phone": "+1-234-567-8901",
+            "department": "Science",
+            "subject": "Mathematics",
+            "experienceYears": 12,
+            "coursesCount": 3,
+            "status": "Active"
+        },
+        {
+            "id": "DRS",
+            "name": "Dr. Robert Smith",
+            "email": "robert.s@school.edu",
+            "phone": "+1-234-567-8902",
+            "department": "Science",
+            "subject": "Physics",
+            "experienceYears": 15,
+            "coursesCount": 2,
+            "status": "Active"
+        },
+        {
+            "id": "PEJ",
+            "name": "Prof. Emily Johnson",
+            "email": "emily.j@school.edu",
+            "phone": "+1-234-567-8903",
+            "department": "Arts",
+            "subject": "History",
+            "experienceYears": 10,
+            "coursesCount": 4,
+            "status": "Active"
+        },
+        {
+            "id": "DMC",
+            "name": "Dr. Michael Chen",
+            "email": "michael.c@school.edu",
+            "phone": "+1-234-567-8904",
+            "department": "Commerce",
+            "subject": "Economics",
+            "experienceYears": 8,
+            "coursesCount": 3,
+            "status": "Active"
+        },
+        {
+            "id": "PJW",
+            "name": "Prof. James Wilson",
+            "email": "james.w@school.edu",
+            "phone": "+1-234-567-8905",
+            "department": "Engineering",
+            "subject": "Computer Science",
+            "experienceYears": 14,
+            "coursesCount": 5,
+            "status": "Active"
+        },
+        {
+            "id": "DLB",
+            "name": "Dr. Lisa Brown",
+            "email": "lisa.b@school.edu",
+            "phone": "+1-234-567-8906",
+            "department": "Arts",
+            "subject": "English",
+            "experienceYears": 9,
+            "coursesCount": 2,
+            "status": "On Leave"
+        }
+    ]
+}

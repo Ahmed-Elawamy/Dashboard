@@ -1,0 +1,218 @@
+{
+    "Grade 10-A": {
+        "attendanceSummary": {
+            "totalStudents": 8,
+            "present": 5,
+            "absent": 2,
+            "late": 1,
+            "attendanceRate": 75,
+            "class": "Grade 10-A",
+            "date": "2025-12-21"
+        },
+        "students": [
+            {
+                "rollNo": "STU001",
+                "name": "Emma Wilson",
+                "class": "Grade 10-A",
+                "checkInTime": "09:15 AM",
+                "status": "present"
+            },
+            {
+                "rollNo": "STU002",
+                "name": "Michael Chen",
+                "class": "Grade 10-A",
+                "checkInTime": "09:10 AM",
+                "status": "present"
+            },
+            {
+                "rollNo": "STU003",
+                "name": "Sarah Johnson",
+                "class": "Grade 10-A",
+                "checkInTime": "-",
+                "status": "absent"
+            },
+            {
+                "rollNo": "STU004",
+                "name": "James Brown",
+                "class": "Grade 10-A",
+                "checkInTime": "09:20 AM",
+                "status": "present"
+            },
+            {
+                "rollNo": "STU005",
+                "name": "Emily Davis",
+                "class": "Grade 10-A",
+                "checkInTime": "09:45 AM",
+                "status": "late"
+            },
+            {
+                "rollNo": "STU006",
+                "name": "David Martinez",
+                "class": "Grade 10-A",
+                "checkInTime": "09:12 AM",
+                "status": "present"
+            },
+            {
+                "rollNo": "STU007",
+                "name": "Sophia Lee",
+                "class": "Grade 10-A",
+                "checkInTime": "09:08 AM",
+                "status": "present"
+            },
+            {
+                "rollNo": "STU008",
+                "name": "Daniel Garcia",
+                "class": "Grade 10-A",
+                "checkInTime": "-",
+                "status": "absent"
+            }
+        ]
+    },
+
+    "Grade 10-B": {
+        "attendanceSummary": {
+            "totalStudents": 6,
+            "present": 4,
+            "absent": 1,
+            "late": 1,
+            "attendanceRate": 66,
+            "class": "Grade 10-B",
+            "date": "2025-12-21"
+        },
+        "students": [
+            {
+                "rollNo": "STU009",
+                "name": "Ali Hassan",
+                "class": "Grade 10-B",
+                "checkInTime": "09:05 AM",
+                "status": "present"
+            },
+            {
+                "rollNo": "STU010",
+                "name": "Omar Khaled",
+                "class": "Grade 10-B",
+                "checkInTime": "09:30 AM",
+                "status": "late"
+            },
+            {
+                "rollNo": "STU011",
+                "name": "Youssef Adel",
+                "class": "Grade 10-B",
+                "checkInTime": "-",
+                "status": "absent"
+            },
+            {
+                "rollNo": "STU012",
+                "name": "Hana Mostafa",
+                "class": "Grade 10-B",
+                "checkInTime": "09:12 AM",
+                "status": "present"
+            },
+            {
+                "rollNo": "STU013",
+                "name": "Mariam Saeed",
+                "class": "Grade 10-B",
+                "checkInTime": "09:10 AM",
+                "status": "present"
+            },
+            {
+                "rollNo": "STU014",
+                "name": "Karim Nabil",
+                "class": "Grade 10-B",
+                "checkInTime": "09:08 AM",
+                "status": "present"
+            }
+        ]
+    },
+
+    "Grade 11-A": {
+        "attendanceSummary": {
+            "totalStudents": 5,
+            "present": 3,
+            "absent": 1,
+            "late": 1,
+            "attendanceRate": 60,
+            "class": "Grade 11-A",
+            "date": "2025-12-21"
+        },
+        "students": [
+            {
+                "rollNo": "STU015",
+                "name": "Nour Ahmed",
+                "class": "Grade 11-A",
+                "checkInTime": "09:00 AM",
+                "status": "present"
+            },
+            {
+                "rollNo": "STU016",
+                "name": "Mahmoud Samir",
+                "class": "Grade 11-A",
+                "checkInTime": "09:40 AM",
+                "status": "late"
+            },
+            {
+                "rollNo": "STU017",
+                "name": "Salma Ibrahim",
+                "class": "Grade 11-A",
+                "checkInTime": "-",
+                "status": "absent"
+            },
+            {
+                "rollNo": "STU018",
+                "name": "Adel Fathy",
+                "class": "Grade 11-A",
+                "checkInTime": "09:10 AM",
+                "status": "present"
+            },
+            {
+                "rollNo": "STU019",
+                "name": "Aya Mostafa",
+                "class": "Grade 11-A",
+                "checkInTime": "09:07 AM",
+                "status": "present"
+            }
+        ]
+    },
+
+    "Grade 11-B": {
+        "attendanceSummary": {
+            "totalStudents": 4,
+            "present": 3,
+            "absent": 1,
+            "late": 0,
+            "attendanceRate": 75,
+            "class": "Grade 11-B",
+            "date": "2025-12-21"
+        },
+        "students": [
+            {
+                "rollNo": "STU020",
+                "name": "Hassan Ali",
+                "class": "Grade 11-B",
+                "checkInTime": "09:05 AM",
+                "status": "present"
+            },
+            {
+                "rollNo": "STU021",
+                "name": "Reem Mohamed",
+                "class": "Grade 11-B",
+                "checkInTime": "09:15 AM",
+                "status": "present"
+            },
+            {
+                "rollNo": "STU022",
+                "name": "Mostafa Adel",
+                "class": "Grade 11-B",
+                "checkInTime": "-",
+                "status": "absent"
+            },
+            {
+                "rollNo": "STU023",
+                "name": "Farah Samy",
+                "class": "Grade 11-B",
+                "checkInTime": "09:08 AM",
+                "status": "present"
+            }
+        ]
+    }
+}

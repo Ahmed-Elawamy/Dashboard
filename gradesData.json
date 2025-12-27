@@ -1,0 +1,783 @@
+{
+    "metadata": {
+        "passRate": 100
+    },
+    "classes": {
+        "Grade 10-A": {
+            "Semester 1": {
+                "students": [
+                    {
+                        "rollNo": "STU001",
+                        "name": "Emma Wilson",
+                        "grades": {
+                            "Mathematics": 92,
+                            "Science": 88,
+                            "English": 95,
+                            "History": 87
+                        },
+                        "average": 90.5,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU002",
+                        "name": "Michael Chen",
+                        "grades": {
+                            "Mathematics": 85,
+                            "Science": 90,
+                            "English": 82,
+                            "History": 88
+                        },
+                        "average": 86.3,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU003",
+                        "name": "Sarah Johnson",
+                        "grades": {
+                            "Mathematics": 78,
+                            "Science": 82,
+                            "English": 85,
+                            "History": 80
+                        },
+                        "average": 81.3,
+                        "grade": "B+"
+                    },
+                    {
+                        "rollNo": "STU004",
+                        "name": "James Brown",
+                        "grades": {
+                            "Mathematics": 88,
+                            "Science": 85,
+                            "English": 90,
+                            "History": 92
+                        },
+                        "average": 88.8,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU005",
+                        "name": "Emily Davis",
+                        "grades": {
+                            "Mathematics": 95,
+                            "Science": 92,
+                            "English": 88,
+                            "History": 90
+                        },
+                        "average": 91.3,
+                        "grade": "A+"
+                    }
+                ]
+            },
+            "Semester 2": {
+                "students": [
+                    {
+                        "rollNo": "STU001",
+                        "name": "Emma Wilson",
+                        "grades": {
+                            "Mathematics": 90,
+                            "Science": 85,
+                            "English": 92,
+                            "History": 88
+                        },
+                        "average": 88.8,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU002",
+                        "name": "Michael Chen",
+                        "grades": {
+                            "Mathematics": 83,
+                            "Science": 87,
+                            "English": 80,
+                            "History": 85
+                        },
+                        "average": 83.8,
+                        "grade": "A-"
+                    },
+                    {
+                        "rollNo": "STU003",
+                        "name": "Sarah Johnson",
+                        "grades": {
+                            "Mathematics": 80,
+                            "Science": 83,
+                            "English": 86,
+                            "History": 82
+                        },
+                        "average": 82.8,
+                        "grade": "B+"
+                    },
+                    {
+                        "rollNo": "STU004",
+                        "name": "James Brown",
+                        "grades": {
+                            "Mathematics": 90,
+                            "Science": 87,
+                            "English": 92,
+                            "History": 93
+                        },
+                        "average": 90.5,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU005",
+                        "name": "Emily Davis",
+                        "grades": {
+                            "Mathematics": 97,
+                            "Science": 94,
+                            "English": 90,
+                            "History": 92
+                        },
+                        "average": 93.3,
+                        "grade": "A+"
+                    }
+                ]
+            },
+            "Final Exam": {
+                "students": [
+                    {
+                        "rollNo": "STU001",
+                        "name": "Emma Wilson",
+                        "grades": {
+                            "Mathematics": 95,
+                            "Science": 90,
+                            "English": 97,
+                            "History": 91
+                        },
+                        "average": 93.3,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU002",
+                        "name": "Michael Chen",
+                        "grades": {
+                            "Mathematics": 88,
+                            "Science": 89,
+                            "English": 85,
+                            "History": 87
+                        },
+                        "average": 87.3,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU003",
+                        "name": "Sarah Johnson",
+                        "grades": {
+                            "Mathematics": 82,
+                            "Science": 85,
+                            "English": 88,
+                            "History": 84
+                        },
+                        "average": 84.8,
+                        "grade": "B+"
+                    },
+                    {
+                        "rollNo": "STU004",
+                        "name": "James Brown",
+                        "grades": {
+                            "Mathematics": 92,
+                            "Science": 90,
+                            "English": 94,
+                            "History": 95
+                        },
+                        "average": 92.8,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU005",
+                        "name": "Emily Davis",
+                        "grades": {
+                            "Mathematics": 98,
+                            "Science": 95,
+                            "English": 92,
+                            "History": 94
+                        },
+                        "average": 94.8,
+                        "grade": "A+"
+                    }
+                ]
+            }
+        },
+        "Grade 10-B": {
+            "Semester 1": {
+                "students": [
+                    {
+                        "rollNo": "STU006",
+                        "name": "Olivia King",
+                        "grades": {
+                            "Mathematics": 85,
+                            "Science": 80,
+                            "English": 88,
+                            "History": 82
+                        },
+                        "average": 83.8,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU007",
+                        "name": "Liam Scott",
+                        "grades": {
+                            "Mathematics": 78,
+                            "Science": 85,
+                            "English": 80,
+                            "History": 79
+                        },
+                        "average": 80.5,
+                        "grade": "B+"
+                    },
+                    {
+                        "rollNo": "STU008",
+                        "name": "Sophia Turner",
+                        "grades": {
+                            "Mathematics": 92,
+                            "Science": 89,
+                            "English": 94,
+                            "History": 91
+                        },
+                        "average": 91.5,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU009",
+                        "name": "Noah Hill",
+                        "grades": {
+                            "Mathematics": 88,
+                            "Science": 87,
+                            "English": 85,
+                            "History": 86
+                        },
+                        "average": 86.5,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU010",
+                        "name": "Mia Baker",
+                        "grades": {
+                            "Mathematics": 95,
+                            "Science": 92,
+                            "English": 90,
+                            "History": 94
+                        },
+                        "average": 92.8,
+                        "grade": "A+"
+                    }
+                ]
+            },
+            "Semester 2": {
+                "students": [
+                    {
+                        "rollNo": "STU006",
+                        "name": "Olivia King",
+                        "grades": {
+                            "Mathematics": 87,
+                            "Science": 82,
+                            "English": 90,
+                            "History": 84
+                        },
+                        "average": 85.8,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU007",
+                        "name": "Liam Scott",
+                        "grades": {
+                            "Mathematics": 80,
+                            "Science": 87,
+                            "English": 83,
+                            "History": 82
+                        },
+                        "average": 83,
+                        "grade": "B+"
+                    },
+                    {
+                        "rollNo": "STU008",
+                        "name": "Sophia Turner",
+                        "grades": {
+                            "Mathematics": 95,
+                            "Science": 91,
+                            "English": 96,
+                            "History": 93
+                        },
+                        "average": 93.8,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU009",
+                        "name": "Noah Hill",
+                        "grades": {
+                            "Mathematics": 90,
+                            "Science": 89,
+                            "English": 88,
+                            "History": 87
+                        },
+                        "average": 88.5,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU010",
+                        "name": "Mia Baker",
+                        "grades": {
+                            "Mathematics": 97,
+                            "Science": 94,
+                            "English": 92,
+                            "History": 95
+                        },
+                        "average": 94.5,
+                        "grade": "A+"
+                    }
+                ]
+            },
+            "Final Exam": {
+                "students": [
+                    {
+                        "rollNo": "STU006",
+                        "name": "Olivia King",
+                        "grades": {
+                            "Mathematics": 90,
+                            "Science": 85,
+                            "English": 92,
+                            "History": 88
+                        },
+                        "average": 88.8,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU007",
+                        "name": "Liam Scott",
+                        "grades": {
+                            "Mathematics": 82,
+                            "Science": 88,
+                            "English": 85,
+                            "History": 83
+                        },
+                        "average": 84.5,
+                        "grade": "B+"
+                    },
+                    {
+                        "rollNo": "STU008",
+                        "name": "Sophia Turner",
+                        "grades": {
+                            "Mathematics": 97,
+                            "Science": 93,
+                            "English": 98,
+                            "History": 95
+                        },
+                        "average": 95.8,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU009",
+                        "name": "Noah Hill",
+                        "grades": {
+                            "Mathematics": 92,
+                            "Science": 90,
+                            "English": 88,
+                            "History": 89
+                        },
+                        "average": 89.8,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU010",
+                        "name": "Mia Baker",
+                        "grades": {
+                            "Mathematics": 98,
+                            "Science": 95,
+                            "English": 93,
+                            "History": 96
+                        },
+                        "average": 95.5,
+                        "grade": "A+"
+                    }
+                ]
+            }
+        },
+        "Grade 11-A": {
+            "Semester 1": {
+                "students": [
+                    {
+                        "rollNo": "STU011",
+                        "name": "Ethan White",
+                        "grades": {
+                            "Mathematics": 88,
+                            "Science": 90,
+                            "English": 85,
+                            "History": 87
+                        },
+                        "average": 87.5,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU012",
+                        "name": "Ava Green",
+                        "grades": {
+                            "Mathematics": 92,
+                            "Science": 95,
+                            "English": 90,
+                            "History": 93
+                        },
+                        "average": 92.5,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU013",
+                        "name": "William Adams",
+                        "grades": {
+                            "Mathematics": 78,
+                            "Science": 80,
+                            "English": 82,
+                            "History": 79
+                        },
+                        "average": 79.8,
+                        "grade": "B+"
+                    },
+                    {
+                        "rollNo": "STU014",
+                        "name": "Isabella Nelson",
+                        "grades": {
+                            "Mathematics": 85,
+                            "Science": 88,
+                            "English": 87,
+                            "History": 86
+                        },
+                        "average": 86.5,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU015",
+                        "name": "James Carter",
+                        "grades": {
+                            "Mathematics": 90,
+                            "Science": 92,
+                            "English": 88,
+                            "History": 91
+                        },
+                        "average": 90.3,
+                        "grade": "A+"
+                    }
+                ]
+            },
+            "Semester 2": {
+                "students": [
+                    {
+                        "rollNo": "STU011",
+                        "name": "Ethan White",
+                        "grades": {
+                            "Mathematics": 90,
+                            "Science": 92,
+                            "English": 87,
+                            "History": 89
+                        },
+                        "average": 89.5,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU012",
+                        "name": "Ava Green",
+                        "grades": {
+                            "Mathematics": 95,
+                            "Science": 97,
+                            "English": 92,
+                            "History": 95
+                        },
+                        "average": 94.8,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU013",
+                        "name": "William Adams",
+                        "grades": {
+                            "Mathematics": 80,
+                            "Science": 82,
+                            "English": 84,
+                            "History": 81
+                        },
+                        "average": 81.8,
+                        "grade": "B+"
+                    },
+                    {
+                        "rollNo": "STU014",
+                        "name": "Isabella Nelson",
+                        "grades": {
+                            "Mathematics": 88,
+                            "Science": 90,
+                            "English": 89,
+                            "History": 88
+                        },
+                        "average": 88.8,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU015",
+                        "name": "James Carter",
+                        "grades": {
+                            "Mathematics": 93,
+                            "Science": 95,
+                            "English": 90,
+                            "History": 94
+                        },
+                        "average": 93,
+                        "grade": "A+"
+                    }
+                ]
+            },
+            "Final Exam": {
+                "students": [
+                    {
+                        "rollNo": "STU011",
+                        "name": "Ethan White",
+                        "grades": {
+                            "Mathematics": 92,
+                            "Science": 94,
+                            "English": 89,
+                            "History": 91
+                        },
+                        "average": 91.5,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU012",
+                        "name": "Ava Green",
+                        "grades": {
+                            "Mathematics": 97,
+                            "Science": 98,
+                            "English": 95,
+                            "History": 97
+                        },
+                        "average": 96.8,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU013",
+                        "name": "William Adams",
+                        "grades": {
+                            "Mathematics": 82,
+                            "Science": 84,
+                            "English": 86,
+                            "History": 83
+                        },
+                        "average": 83.8,
+                        "grade": "B+"
+                    },
+                    {
+                        "rollNo": "STU014",
+                        "name": "Isabella Nelson",
+                        "grades": {
+                            "Mathematics": 90,
+                            "Science": 92,
+                            "English": 91,
+                            "History": 90
+                        },
+                        "average": 90.8,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU015",
+                        "name": "James Carter",
+                        "grades": {
+                            "Mathematics": 95,
+                            "Science": 97,
+                            "English": 92,
+                            "History": 96
+                        },
+                        "average": 95,
+                        "grade": "A+"
+                    }
+                ]
+            }
+        },
+        "Grade 11-B": {
+            "Semester 1": {
+                "students": [
+                    {
+                        "rollNo": "STU016",
+                        "name": "Charlotte Hall",
+                        "grades": {
+                            "Mathematics": 85,
+                            "Science": 88,
+                            "English": 83,
+                            "History": 86
+                        },
+                        "average": 85.5,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU017",
+                        "name": "Alexander Allen",
+                        "grades": {
+                            "Mathematics": 90,
+                            "Science": 92,
+                            "English": 88,
+                            "History": 91
+                        },
+                        "average": 90.3,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU018",
+                        "name": "Amelia Young",
+                        "grades": {
+                            "Mathematics": 78,
+                            "Science": 82,
+                            "English": 80,
+                            "History": 79
+                        },
+                        "average": 79.8,
+                        "grade": "B+"
+                    },
+                    {
+                        "rollNo": "STU019",
+                        "name": "Benjamin King",
+                        "grades": {
+                            "Mathematics": 88,
+                            "Science": 90,
+                            "English": 85,
+                            "History": 87
+                        },
+                        "average": 87.5,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU020",
+                        "name": "Harper Scott",
+                        "grades": {
+                            "Mathematics": 93,
+                            "Science": 95,
+                            "English": 92,
+                            "History": 94
+                        },
+                        "average": 93.5,
+                        "grade": "A+"
+                    }
+                ]
+            },
+            "Semester 2": {
+                "students": [
+                    {
+                        "rollNo": "STU016",
+                        "name": "Charlotte Hall",
+                        "grades": {
+                            "Mathematics": 87,
+                            "Science": 89,
+                            "English": 85,
+                            "History": 88
+                        },
+                        "average": 87.3,
+                        "grade": "A"
+                    },
+                    {
+                        "rollNo": "STU017",
+                        "name": "Alexander Allen",
+                        "grades": {
+                            "Mathematics": 92,
+                            "Science": 95,
+                            "English": 90,
+                            "History": 93
+                        },
+                        "average": 92.5,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU018",
+                        "name": "Amelia Young",
+                        "grades": {
+                            "Mathematics": 80,
+                            "Science": 84,
+                            "English": 82,
+                            "History": 81
+                        },
+                        "average": 81.8,
+                        "grade": "B+"
+                    },
+                    {
+                        "rollNo": "STU019",
+                        "name": "Benjamin King",
+                        "grades": {
+                            "Mathematics": 90,
+                            "Science": 92,
+                            "English": 88,
+                            "History": 91
+                        },
+                        "average": 90.3,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU020",
+                        "name": "Harper Scott",
+                        "grades": {
+                            "Mathematics": 95,
+                            "Science": 97,
+                            "English": 93,
+                            "History": 96
+                        },
+                        "average": 95.3,
+                        "grade": "A+"
+                    }
+                ]
+            },
+            "Final Exam": {
+                "students": [
+                    {
+                        "rollNo": "STU016",
+                        "name": "Charlotte Hall",
+                        "grades": {
+                            "Mathematics": 90,
+                            "Science": 92,
+                            "English": 88,
+                            "History": 91
+                        },
+                        "average": 90.3,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU017",
+                        "name": "Alexander Allen",
+                        "grades": {
+                            "Mathematics": 95,
+                            "Science": 97,
+                            "English": 92,
+                            "History": 95
+                        },
+                        "average": 94.8,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU018",
+                        "name": "Amelia Young",
+                        "grades": {
+                            "Mathematics": 82,
+                            "Science": 86,
+                            "English": 84,
+                            "History": 83
+                        },
+                        "average": 83.8,
+                        "grade": "B+"
+                    },
+                    {
+                        "rollNo": "STU019",
+                        "name": "Benjamin King",
+                        "grades": {
+                            "Mathematics": 92,
+                            "Science": 94,
+                            "English": 90,
+                            "History": 93
+                        },
+                        "average": 92.3,
+                        "grade": "A+"
+                    },
+                    {
+                        "rollNo": "STU020",
+                        "name": "Harper Scott",
+                        "grades": {
+                            "Mathematics": 97,
+                            "Science": 98,
+                            "English": 95,
+                            "History": 97
+                        },
+                        "average": 96.8,
+                        "grade": "A+"
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -15,7 +15,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupsIcon from "@mui/icons-material/Groups";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
@@ -26,12 +25,11 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import GradeIcon from "@mui/icons-material/Grade";
 import { Link, useLocation } from "react-router-dom";
 
-import "../App.css";
-
-const drawerWidth = 240;
+const DRAWER_OPEN = 280;
+const DRAWER_CLOSED = 72;
 
 const openedMixin = (theme) => ({
-    width: drawerWidth,
+    width: DRAWER_OPEN,
     transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
@@ -40,59 +38,31 @@ const openedMixin = (theme) => ({
 });
 
 const closedMixin = (theme) => ({
+    width: DRAWER_CLOSED,
     transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
-    width: `calc(${theme.spacing(7)} + 1px)`,
-    [theme.breakpoints.up("sm")]: {
-        width: `calc(${theme.spacing(8)} + 1px)`,
-    },
 });
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
-}));
-
-const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== "open",
-})(({ theme }) => ({
+const AppBar = styled(MuiAppBar)(({ theme }) => ({
     zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
+    background: "transparent",
+    boxShadow: "none",
+    color: "black",
 }));
 
-const Drawer = styled(MuiDrawer, {
-    shouldForwardProp: (prop) => prop !== "open",
-})(({ theme }) => ({
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: "nowrap",
-    boxSizing: "border-box",
-}));
-
-export default function Sidebar() {
+export default function Sidebar({ open, setOpen, isMobile }) {
+    const theme = useTheme();
     const location = useLocation();
 
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(true);
-
-    const handleDrawerOpen = () => setOpen(true);
-    const handleDrawerClose = () => setOpen(false);
+    React.useEffect(() => {
+        if (isMobile) setOpen(false);
+    }, [isMobile]);
 
     const menuItems = [
-        {
-            text: "Dashboard",
-            icon: <DashboardIcon />,
-            path: "/dashboard",
-        },
+        { text: "Dashboard", icon: <DashboardIcon />, path: "/dashboard" },
         { text: "Students", icon: <GroupsIcon />, path: "/students" },
         { text: "Courses", icon: <LocalLibraryIcon />, path: "/courses" },
         {
@@ -109,155 +79,117 @@ export default function Sidebar() {
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
-            <AppBar
-                position="fixed"
-                open={open}
-                sx={{
-                    background: "transparent",
-                    boxShadow: "none",
-                    color: "black",
-                }}
-            >
-                <Toolbar
-                    sx={{
-                        p: 0,
-                        display: open ? "none" : "flex",
-                        alignItems: "center",
-                        minHeight: "48px !important",
-                    }}
-                >
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        sx={{
-                            ml: 1,
-                            position: "absolute",
-                            left: "4px",
-                        }}
-                    >
+
+            {/* AppBar */}
+            {/* <AppBar position="fixed">
+                <Toolbar sx={{ minHeight: 56 }}>
+                    <IconButton onClick={() => setOpen(!open)}>
                         <MenuIcon />
                     </IconButton>
                 </Toolbar>
-            </AppBar>
+            </AppBar> */}
 
-            <Drawer
+            {/* Drawer */}
+            <MuiDrawer
+                // variant={isMobile ? "temporary" : "permanent"}
                 variant="permanent"
                 open={open}
+                onClose={() => setOpen(false)}
+                ModalProps={{ keepMounted: true }}
                 sx={{
-                    "& .MuiDrawer-paper": open
-                        ? openedMixin(theme)
-                        : closedMixin(theme),
+                    ...(isMobile
+                        ? {
+                              "& .MuiDrawer-paper": {
+                                  // width: DRAWER_OPEN,
+                                  //   width: DRAWER_CLOSED,
+                                  width: open ? DRAWER_OPEN : DRAWER_CLOSED,
+                              },
+                          }
+                        : open
+                        ? {
+                              "& .MuiDrawer-paper": openedMixin(theme),
+                          }
+                        : {
+                              "& .MuiDrawer-paper": closedMixin(theme),
+                          }),
                 }}
             >
-                <DrawerHeader
-                    style={{
-                        minHeight: "20px !important",
-                        height: "40px !important",
-                        maxHeight: "4px !important",
-                    }}
-                >
-                    <IconButton
-                        onClick={handleDrawerClose}
-                        style={{
-                            display: open ? "flex" : "none",
-
-                            padding: 0,
-                            margin: 0,
-                            minHeight: "0px !important",
-                        }}
-                    >
-                        {theme.direction === "rtl" ? (
-                            <ChevronRightIcon />
-                        ) : (
-                            <ChevronLeftIcon />
-                        )}
-                    </IconButton>
-                </DrawerHeader>
-
                 <Box
                     sx={{
                         display: "flex",
                         alignItems: "center",
                         gap: 1.5,
-                        height: 70,
-                        width: "100%",
-                        p: 1.5,
-                        boxSizing: "border-box",
+                        px: 2,
+                        py: 2,
+                        flexDirection: open ? "row" : "column-reverse",
                     }}
                 >
                     <Box
                         sx={{
                             bgcolor: "#007FFF",
-                            width: 45,
-                            height: 45,
+                            width: 40,
+                            height: 40,
                             borderRadius: 1.5,
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
                         }}
                     >
-                        <SchoolIcon sx={{ fontSize: 28, color: "#fff" }} />
+                        <SchoolIcon sx={{ color: "#fff" }} />
                     </Box>
+
                     {open && (
-                        <Box sx={{ display: "flex", flexDirection: "column" }}>
-                            <Typography
-                                variant="subtitle1"
-                                sx={{ fontWeight: "bold" }}
-                            >
-                                EduManage
-                            </Typography>
+                        <Box>
+                            <Typography fontWeight="bold">EduManage</Typography>
                             <Typography variant="caption" sx={{ opacity: 0.7 }}>
                                 Student Management
                             </Typography>
                         </Box>
                     )}
+
+                    {/* {!isMobile && open && ( */}
+                    <IconButton
+                        sx={{ ml: "auto" }}
+                        onClick={() => setOpen(!open)}
+                    >
+                        {open ? <ChevronLeftIcon /> : <MenuIcon />}
+                        {/*  */}
+                    </IconButton>
+                    {/* )} */}
                 </Box>
 
                 <Divider />
 
-                <List>
+                <List sx={{ px: 1 }}>
                     {menuItems.map((item) => {
-                        const isActive = location.pathname === item.path;
+                        const active = location.pathname === item.path;
 
                         return (
-                            <ListItem
-                                key={item.text}
-                                disablePadding
-                                sx={{ display: "block" }}
-                            >
+                            <ListItem key={item.text} disablePadding>
                                 <ListItemButton
                                     component={Link}
                                     to={item.path}
-                                    sx={[
-                                        {
-                                            minHeight: 48,
-                                            px: 2.5,
-                                            borderRadius: 2,
-                                            justifyContent: open
-                                                ? "initial"
-                                                : "center",
-                                        },
-                                        isActive && {
-                                            backgroundColor: "#007FFF22",
-                                            color: "#007FFF",
-                                            "& svg": { color: "#007FFF" }, // لون الأيقونة
-                                            fontWeight: "bold",
-                                        },
-                                    ]}
+                                    onClick={() => isMobile && setOpen(false)}
+                                    sx={{
+                                        minHeight: 48,
+                                        px: 2,
+                                        borderRadius: 2,
+                                        justifyContent: open
+                                            ? "flex-start"
+                                            : "center",
+                                        bgcolor: active
+                                            ? "#007FFF22"
+                                            : "transparent",
+                                    }}
                                 >
                                     <ListItemIcon
-                                        sx={[
-                                            {
-                                                minWidth: 0,
-                                                justifyContent: "center",
-                                                mr: open ? 3 : "auto",
-                                            },
-                                            isActive && {
-                                                color: "#007FFF",
-                                            },
-                                        ]}
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: open ? 2 : "auto",
+                                            color: active
+                                                ? "#007FFF"
+                                                : "inherit",
+                                        }}
                                     >
                                         {item.icon}
                                     </ListItemIcon>
@@ -271,7 +203,7 @@ export default function Sidebar() {
                         );
                     })}
                 </List>
-            </Drawer>
+            </MuiDrawer>
         </Box>
     );
 }

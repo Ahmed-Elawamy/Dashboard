@@ -1,0 +1,67 @@
+[
+    {
+        "id": "ENG301",
+        "name": "React & Next",
+        "description": "How React Worked",
+        "status": "Copmleted",
+        "students_enrolled": 35,
+        "duration_weeks": 12,
+        "teacher": "Dr. Ahmed Elawamy",
+        "department": "Programming",
+        "phone": "01234567890"
+    },
+    {
+        "id": "MATH501",
+        "name": "Advanced Mathematics",
+        "description": "Advanced calculus and algebra",
+        "status": "Active",
+        "students_enrolled": 32,
+        "duration_weeks": 12,
+        "teacher": "Dr. Sarah Anderson",
+        "department": "Science",
+        "phone": "01234567890"
+    },
+    {
+        "id": "PHY1201",
+        "name": "Physics Lab",
+        "description": "Practical physics experiments",
+        "status": "Copmleted",
+        "students_enrolled": 28,
+        "duration_weeks": 14,
+        "teacher": "Dr. Robert Smith",
+        "department": "Science",
+        "phone": "01234567890"
+    },
+    {
+        "id": "HIST101",
+        "name": "World History",
+        "description": "Comprehensive world history",
+        "status": "Active",
+        "students_enrolled": 45,
+        "duration_weeks": 12,
+        "teacher": "Prof. Emily Johnson",
+        "department": "Arts"
+    },
+    {
+        "id": "ECON202",
+        "name": "Business Economics",
+        "description": "Economic principles and applications",
+        "status": "Active",
+        "students_enrolled": 38,
+        "duration_weeks": 12,
+        "teacher": "Dr. Michael Chen",
+        "department": "Science",
+        "phone": "01234567890"
+    },
+    {
+        "id": "CS101",
+        "name": "Computer Programming",
+        "description": "Introduction to programming",
+        "status": "Active",
+        "students_enrolled": 42,
+        "duration_weeks": 16,
+        "teacher": "Prof. James Wilson",
+        "department": "Programming",
+        "phone": "01234567890"
+    }
+]

@@ -1,25 +1,42 @@
-import { Pie, PieChart, Tooltip } from "recharts";
+import React from "react";
+import { Box, Typography } from "@mui/material";
+import Chart from "react-apexcharts";
 
-export default function materialChart() {
-    const data = [
-        { name: "Science ", num: 35 },
-        { name: "Math ", num: 13 },
-        { name: "C++ ", num: 33 },
-        { name: "Java ", num: 53 },
-    ];
-    let isAnimationActive = true;
+export default function MaterialChart() {
+    const series = [35, 13, 33, 53];
+    const labels = ["Science", "Math", "C++", "Java"];
+
+    const options = {
+        chart: { type: "pie" },
+        labels: labels,
+        colors: ["#007FFF", "#00BFFF", "#1E90FF", "#87CEFA"],
+        legend: { position: "bottom" },
+        tooltip: { y: { formatter: (val) => `${val} Students` } },
+        dataLabels: { enabled: true },
+    };
 
     return (
-        <PieChart width={400} height={400}>
-            <Pie
-                activeShape={{
-                    fill: "#007FFF",
-                }}
-                data={data}
-                dataKey="num"
-                isAnimationActive={isAnimationActive}
+        <Box
+            sx={{
+                width: "100%",
+                height: { xs: 300, md: 400 },
+                mt: 4,
+                background: "white",
+                padding: 3,
+                borderRadius: "11px",
+                boxShadow: "1px 1px 5px 5px #0000001a",
+            }}
+        >
+            <Typography variant="h6" sx={{ mb: 2, fontWeight: 300 }}>
+                Students by Subject
+            </Typography>
+            <Chart
+                options={options}
+                series={series}
+                type="pie"
+                height="100%"
+                width="100%"
             />
-            <Tooltip defaultIndex={2} />
-        </PieChart>
+        </Box>
     );
 }

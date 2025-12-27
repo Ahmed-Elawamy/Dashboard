@@ -1,21 +1,12 @@
-import "../App.css";
-import StudentsChart from "./StudentsChart ";
-import MaterialChart from "./MaterialChart";
-import * as React from "react";
-import {
-    Box,
-    Container,
-    Grid,
-    Typography,
-    Card,
-    CardContent,
-} from "@mui/material";
-
-// MUI Icons
+import React from "react";
+import { Container, Typography, Card, Box } from "@mui/material";
 import LocalLibraryOutlinedIcon from "@mui/icons-material/LocalLibraryOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import TrendingUpOutlinedIcon from "@mui/icons-material/TrendingUpOutlined";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
+
+import StudentsChart from "./StudentsChart ";
+import MaterialChart from "./MaterialChart";
 
 function Dashboard() {
     const cards = [
@@ -24,7 +15,7 @@ function Dashboard() {
             value: "260",
             change: "+12% from last month",
             icon: (
-                <PeopleOutlinedIcon sx={{ fontSize: 32, color: "#45556c" }} />
+                <PeopleOutlinedIcon sx={{ fontSize: 32, color: "#007fff" }} />
             ),
         },
         {
@@ -33,7 +24,7 @@ function Dashboard() {
             change: "8 new this semester",
             icon: (
                 <LocalLibraryOutlinedIcon
-                    sx={{ fontSize: 32, color: "#45556c" }}
+                    sx={{ fontSize: 32, color: "#007fff" }}
                 />
             ),
         },
@@ -43,7 +34,7 @@ function Dashboard() {
             change: "+2.3% from last week",
             icon: (
                 <TrendingUpOutlinedIcon
-                    sx={{ fontSize: 32, color: "#45556c" }}
+                    sx={{ fontSize: 32, color: "#007fff" }}
                 />
             ),
         },
@@ -53,7 +44,7 @@ function Dashboard() {
             change: "+8% from last month",
             icon: (
                 <AttachMoneyOutlinedIcon
-                    sx={{ fontSize: 32, color: "#45556c" }}
+                    sx={{ fontSize: 32, color: "#007fff" }}
                 />
             ),
         },
@@ -63,79 +54,90 @@ function Dashboard() {
         <>
             <Typography
                 variant="h5"
-                sx={{ textAlign: "left", fontWeight: "600" }}
+                sx={{ textAlign: "left", fontWeight: 600 }}
             >
                 Dashboard
             </Typography>
             <Typography
                 variant="h6"
-                sx={{ textAlign: "left", fontWeight: "300" }}
+                sx={{ textAlign: "left", fontWeight: 300 }}
             >
                 Welcome to your student management system
             </Typography>
-
             <Container maxWidth="lg" sx={{ pt: 5 }}>
-                <Grid
-                    container
-                    spacing={3}
+                <Box
                     sx={{
-                        display: "grid",
-                        gridTemplateColumns:
-                            "repeat(auto-fit, minmax(250px, 1fr))",
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: 3,
+                        justifyContent: "center",
+                        mt: 2,
                     }}
                 >
+                    
                     {cards.map((item, index) => (
-                        <Grid item xs={12} sm={6} md={3} key={index}>
-                            <Card
+                        <Card
+                            key={index}
+                            sx={{
+                                flex: "1 1 214px",
+                                maxWidth: 260,
+                                height: 176,
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                borderRadius: 4,
+                                border: "1px solid #e0e0e0",
+                                p: 2,
+                                textAlign: "center",
+                                boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+                            }}
+                        >
+                            {item.icon}
+                            <Typography
                                 sx={{
-                                    borderRadius: 4,
-                                    p: 2,
-                                    height: 160,
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    justifyContent: "space-between",
-                                    border: "1px solid #e0e0e0",
+                                    fontWeight: 300,
+                                    fontSize: "1rem",
+                                    mt: 1,
                                 }}
                             >
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <Typography sx={{ fontWeight: "300" }}>
-                                        {item.title}
-                                    </Typography>
-
-                                    {item.icon}
-                                </Box>
-
-                                <Typography
-                                    variant="h5"
-                                    sx={{ fontWeight: "300" }}
-                                >
-                                    {item.value}
-                                </Typography>
-
-                                <Typography
-                                    sx={{
-                                        fontSize: 13,
-                                        color: "gray",
-                                        fontWeight: "300",
-                                    }}
-                                >
-                                    {item.change}
-                                </Typography>
-                            </Card>
-                        </Grid>
+                                {item.title}
+                            </Typography>
+                            <Typography
+                                variant="h5"
+                                sx={{
+                                    fontWeight: 300,
+                                    mt: 0.5,
+                                    color: "#007fff",
+                                }}
+                            >
+                                {item.value}
+                            </Typography>
+                            <Typography
+                                sx={{ fontSize: 12, color: "gray", mt: 0.5 }}
+                            >
+                                {item.change}
+                            </Typography>
+                        </Card>
                     ))}
-                </Grid>
+                </Box>
 
-                <Grid container>
-                    <StudentsChart />
-                    <MaterialChart />
-                </Grid>
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: 3,
+                        mt: 4,
+                        justifyContent: "center",
+                    }}
+                >
+                    <Box sx={{ flex: "1 1 300px", maxWidth: 600 }}>
+                        <StudentsChart />
+                    </Box>
+                    <Box sx={{ flex: "1 1 300px", maxWidth: 600 }}>
+                        <MaterialChart />
+                    </Box>
+                </Box>
             </Container>
         </>
     );

@@ -1,0 +1,72 @@
+{
+    "summary": {
+        "totalRevenue": {
+            "value": "$39,000",
+            "change": "+12% from last month"
+        },
+        "pendingFee": {
+            "value": "$20,000",
+            "note": "3 students overdue"
+        },
+        "collectionRate": {
+            "value": "66.1%",
+            "note": "Above target"
+        },
+        "expectedTotal": {
+            "value": "$59,000",
+            "note": "This semester"
+        }
+    },
+    "students": [
+        {
+            "rollNo": "STU001",
+            "studentName": "Emma Wilson",
+            "class": "Grade 10-A",
+            "totalFee": "$10,000",
+            "paid": "$10,000",
+            "pending": "$0",
+            "status": "Paid",
+            "lastPayment": "2024-11-01"
+        },
+        {
+            "rollNo": "STU002",
+            "studentName": "Michael Chen",
+            "class": "Grade 11-B",
+            "totalFee": "$12,000",
+            "paid": "$9,000",
+            "pending": "$3,000",
+            "status": "Partial",
+            "lastPayment": "2024-10-15"
+        },
+        {
+            "rollNo": "STU003",
+            "studentName": "Sarah Johnson",
+            "class": "Grade 12-A",
+            "totalFee": "$15,000",
+            "paid": "$15,000",
+            "pending": "$0",
+            "status": "Paid",
+            "lastPayment": "2024-10-28"
+        },
+        {
+            "rollNo": "STU004",
+            "studentName": "James Brown",
+            "class": "Grade 10-B",
+            "totalFee": "$10,000",
+            "paid": "$5,000",
+            "pending": "$5,000",
+            "status": "Pending",
+            "lastPayment": "2024-09-20"
+        },
+        {
+            "rollNo": "STU005",
+            "studentName": "Emily Davis",
+            "class": "Grade 11-A",
+            "totalFee": "$12,000",
+            "paid": "$0",
+            "pending": "$12,000",
+            "status": "Overdue",
+            "lastPayment": "2024-10-29"
+        }
+    ]
+}

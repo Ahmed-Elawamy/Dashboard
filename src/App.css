@@ -1,23 +1,10 @@
-#root {
-    /* margin: 0 auto; */
-    /* text-align: center; */
+body {
     background-color: oklch(0.984 0.003 247.858);
 }
 
-button:focus,
-button:focus-visible {
-    outline: none !important;
-    border: none !important;
-}
 
-.card {
-    /* width: 260px;
-    height: 145px; */
+/* .card {
     box-shadow: 0 0 3px #00000005 !important;
-
     border: 1px solid #00000004 !important;
     border-radius: 20px !important;
-}
-section {
-    /* padding: 40px !important */
-}
+} */

@@ -10,13 +10,12 @@ import StudentDialog from "./StudentDialog.jsx";
 
 import studentData from "../Data.json";
 
-function Students() {
+function Students({ isMobile, open }) {
     const [openDialog, setOpenDialog] = React.useState(false);
     const [rows, setRows] = React.useState(studentData);
     const [mode, setMode] = React.useState("add"); // add | edit
     const [selectedStudent, setSelectedStudent] = React.useState(null);
-    const [editStudentData, setEditStudentData] = React.useState({
-    });
+    const [editStudentData, setEditStudentData] = React.useState({});
     const handleAdd = () => {
         setMode("add");
         setEditStudentData({});
@@ -30,15 +29,20 @@ function Students() {
         setOpenDialog(true);
     };
 
+    // maxWidth={isMobile === true ? "sm" : "md"}
+    // open ? (isPhone ? "sm" : "sm") : (isPhone ? "sm" : "lg")
     return (
-        <Container maxWidth="lg" sx={{ pt: 5 }}>
+        <Container
+            maxWidth={open ? isMobile ? "sm" : "md" : isMobile ? "sm" : "md"}
+            sx={{ pt: 5 }}
+        >
             <div
                 style={{
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
                     flexWrap: "wrap",
-                    margin: "25px 0",
+                    margin: "0 0 25px 0",
                 }}
             >
                 <div>
@@ -78,9 +82,11 @@ function Students() {
                     border: "1px solid #00000036",
                     position: "relative",
                     padding: "30px",
+                    width: isMobile ? "74%" : "100%",
                 }}
             >
                 <TableOfStudents
+                    isMobile={isMobile}
                     rows={rows}
                     setRows={setRows}
                     onEdit={handleEdit}
@@ -99,7 +105,6 @@ function Students() {
                 setEditStudentData={setEditStudentData}
                 rows={rows}
                 setRows={setRows}
-                
             />
         </Container>
     );
