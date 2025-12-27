@@ -12,7 +12,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 
-export default function TableOfFinance({ rows, setRows }) {
+export default function TableOfFinance({ rows, setRows, isMobile }) {
     const [openView, setOpenView] = React.useState(false);
     const [selectedStudent, setSelectedStudent] = React.useState(null);
 
@@ -118,6 +118,7 @@ export default function TableOfFinance({ rows, setRows }) {
                                                 background: "#030213",
                                                 borderRadius: "11px",
                                                 padding: "3px 9px",
+                                                marginTop: "10px"
                                             }}
                                             onClick={() =>
                                                 handleCollect(row.rollNo)

@@ -1,5 +1,13 @@
 import * as React from "react";
-import { Box, Modal, Fade, Typography, Button, TextField } from "@mui/material";
+import {
+    Box,
+    Modal,
+    Fade,
+    Typography,
+    Button,
+    TextField,
+    Stack,
+} from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import {
     Search as SearchIcon,
@@ -7,7 +15,7 @@ import {
     EditOutlined,
     DeleteOutlined,
 } from "@mui/icons-material";
-import { styled } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 
 /* ===== Styles ===== */
@@ -31,10 +39,9 @@ const Search = styled("div")(({ theme }) => ({
     display: "flex",
     alignItems: "center",
     gap: 8,
-    // width: 300,
     marginBottom: 16,
-        width: "75%"
-
+    width: "100%",
+    maxWidth: 360,
 }));
 
 const StyledInputBase = styled(InputBase)(() => ({
@@ -50,6 +57,10 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
     const [open, setOpen] = React.useState(false);
     const [mode, setMode] = React.useState("view"); // view | edit | add
     const [formData, setFormData] = React.useState(null);
+
+    // Delete dialog
+    const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
+    const [teacherToDelete, setTeacherToDelete] = React.useState(null);
 
     /* ===== Handlers ===== */
 
@@ -81,21 +92,33 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
         setOpen(true);
     };
 
-    const handleDelete = (row) => {
-        if (window.confirm(`Delete ${row.name}?`)) {
-            const updated = teachers.filter((t) => t.id !== row.id);
-            setRows({ ...rows, teachers: updated });
-        }
+    const handleDeleteClick = (row) => {
+        setTeacherToDelete(row);
+        setDeleteDialogOpen(true);
+    };
+
+    const handleDeleteConfirm = () => {
+        setRows({
+            ...rows,
+            teachers: teachers.filter((t) => t.id !== teacherToDelete.id),
+        });
+        setDeleteDialogOpen(false);
+        setTeacherToDelete(null);
     };
 
     const handleSave = () => {
         if (mode === "edit") {
-            const updated = teachers.map((t) =>
-                t.id === formData.id ? formData : t
-            );
-            setRows({ ...rows, teachers: updated });
+            setRows({
+                ...rows,
+                teachers: teachers.map((t) =>
+                    t.id === formData.id ? formData : t
+                ),
+            });
         } else if (mode === "add") {
-            setRows({ ...rows, teachers: [...teachers, formData] });
+            setRows({
+                ...rows,
+                teachers: [...teachers, formData],
+            });
         }
         setOpen(false);
     };
@@ -112,10 +135,10 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
                 field: "initials",
                 headerName: "",
                 width: 70,
+                sortable: false,
                 renderCell: (params) => {
-                    const name = params.row.name || "";
-                    const initials = name
-                        .split(" ")
+                    const initials = params.row.name
+                        ?.split(" ")
                         .map((n) => n[0])
                         .join("");
                     return (
@@ -137,19 +160,19 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
                 },
             },
             { field: "name", headerName: "Teacher", width: 200 },
-            { field: "department", headerName: "Department", width: 150 },
+            { field: "department", headerName: "Department", width: 160 },
             { field: "subject", headerName: "Subject", width: 160 },
             {
                 field: "experienceYears",
                 headerName: "Experience",
                 width: 140,
-                valueFormatter: (params) => `${params.value} years`,
+                valueFormatter: (p) => `${p.value} years`,
             },
             {
                 field: "coursesCount",
                 headerName: "Courses",
                 width: 120,
-                valueFormatter: (params) => `${params.value} courses`,
+                valueFormatter: (p) => `${p.value} courses`,
             },
             {
                 field: "status",
@@ -158,19 +181,10 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
                 renderCell: (params) => (
                     <Box
                         sx={{
-                            px: 2,
-                            py: 0.5,
-                            borderRadius: 2,
-                            // bgcolor:
-                            //     params.value === "Active"
-                            //         ? "#030213"
-                            //         : "#e0e0e0",
-                            color:
-                                params.value === "Active"
-                                    ? "#0a7c13ff"
-                                    : "#000",
-                            fontSize: 13,
                             fontWeight: "bold",
+                            fontSize: 13,
+                            color:
+                                params.value === "Active" ? "#0a7c13" : "#000",
                         }}
                     >
                         {params.value}
@@ -183,7 +197,13 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
                 width: 150,
                 sortable: false,
                 renderCell: (params) => (
-                    <Box sx={{ display: "flex", gap: 1 }}>
+                    <Stack
+                        direction="row"
+                        spacing={1}
+                        alignItems="center"
+                        justifyContent="center"
+                        height="100%"
+                    >
                         <VisibilityOutlined
                             sx={{ cursor: "pointer" }}
                             onClick={() => handleView(params.row)}
@@ -194,9 +214,9 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
                         />
                         <DeleteOutlined
                             sx={{ cursor: "pointer", color: "#f44336" }}
-                            onClick={() => handleDelete(params.row)}
+                            onClick={() => handleDeleteClick(params.row)}
                         />
-                    </Box>
+                    </Stack>
                 ),
             },
         ],
@@ -221,36 +241,56 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
     return (
         <>
             <Box
-                sx={{ display: "flex", justifyContent: "space-around",flexWrap: "wrap", mb: 2 }}
+                sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "space-between",
+                    gap: 2,
+                    mb: 2,
+                }}
             >
-                <Search sx={{width: isMobile ? "100%": "auto%"}}>
+                <Search>
                     <SearchIcon />
                     <StyledInputBase
-                        placeholder="Search by name, email, subject or department…"
+                        placeholder="Search teacher…"
                         value={searchText}
                         onChange={(e) => setSearchText(e.target.value)}
                     />
                 </Search>
 
-                <Button variant="contained" onClick={handleAdd}>
+                <Button
+                    variant="contained"
+                    onClick={handleAdd}
+                    sx={{ height: "43px" }}
+                >
                     Add Teacher
                 </Button>
             </Box>
 
-            <Box sx={{ height: 420, width: "100%" }}>
-                <DataGrid
-                    rows={filteredRows}
-                    columns={columns}
-                    pageSizeOptions={[5, 10]}
-                    disableRowSelectionOnClick
-                />
+            {/* === الجدول === */}
+            <Box
+                sx={{
+                    width: "100%",
+                    maxWidth: "100%",
+                    overflowX: "auto",
+                }}
+            >
+                <Box sx={{ minWidth: 900, height: 420 }}>
+                    <DataGrid
+                        rows={filteredRows}
+                        columns={columns}
+                        pageSizeOptions={[5, 10]}
+                        disableRowSelectionOnClick
+                        hideFooter
+                    />
+                </Box>
             </Box>
 
+            {/* === Modal Add/Edit/View === */}
             <Modal
                 open={open}
                 onClose={() => setOpen(false)}
                 closeAfterTransition
-                slots={{ backdrop: "Backdrop" }}
             >
                 <Fade in={open}>
                     <Box sx={modalStyle}>
@@ -273,10 +313,7 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
                                 ].map((f) => (
                                     <TextField
                                         key={f}
-                                        label={
-                                            f.charAt(0).toUpperCase() +
-                                            f.slice(1)
-                                        }
+                                        label={f}
                                         value={formData[f]}
                                         onChange={(e) =>
                                             handleChange(f, e.target.value)
@@ -284,6 +321,7 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
                                         fullWidth
                                         sx={{ mb: 2 }}
                                         disabled={mode === "view"}
+                                        required
                                     />
                                 ))}
 
@@ -300,6 +338,7 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
                                     fullWidth
                                     sx={{ mb: 2 }}
                                     disabled={mode === "view"}
+                                    required
                                 />
 
                                 <TextField
@@ -315,6 +354,7 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
                                     fullWidth
                                     sx={{ mb: 2 }}
                                     disabled={mode === "view"}
+                                    required
                                 />
 
                                 <TextField
@@ -326,31 +366,68 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
                                     fullWidth
                                     sx={{ mb: 2 }}
                                     disabled={mode === "view"}
+                                    required
                                 />
 
-                                <Box sx={{ mt: 2, textAlign: "right" }}>
+                                <Box sx={{ textAlign: "right" }}>
                                     {mode !== "view" && (
                                         <Button
                                             variant="contained"
                                             onClick={handleSave}
-                                            sx={{ mr: 1, bgcolor: "#030213" }}
+                                            sx={{ mr: 1 }}
+                                            disabled={Object.values(
+                                                formData
+                                            ).some(
+                                                (v) => v === "" || v === null
+                                            )}
                                         >
-                                            Save
+                                            {mode === "add" ? "Add" : "Save"}
                                         </Button>
                                     )}
                                     <Button
                                         variant="outlined"
                                         onClick={() => setOpen(false)}
-                                        sx={{
-                                            borderColor: "#030213",
-                                            color: "#030213",
-                                        }}
                                     >
                                         Close
                                     </Button>
                                 </Box>
                             </>
                         )}
+                    </Box>
+                </Fade>
+            </Modal>
+
+            {/* === Delete Confirmation Dialog === */}
+            <Modal
+                open={deleteDialogOpen}
+                onClose={() => setDeleteDialogOpen(false)}
+                closeAfterTransition
+            >
+                <Fade in={deleteDialogOpen}>
+                    <Box sx={modalStyle}>
+                        <Typography variant="h6" mb={2}>
+                            Delete Teacher
+                        </Typography>
+                        <Typography mb={3}>
+                            Are you sure you want to delete{" "}
+                            <strong>{teacherToDelete?.name}</strong>?
+                        </Typography>
+                        <Box sx={{ textAlign: "right" }}>
+                            <Button
+                                variant="outlined"
+                                onClick={() => setDeleteDialogOpen(false)}
+                                sx={{ mr: 1 }}
+                            >
+                                Cancel
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="error"
+                                onClick={handleDeleteConfirm}
+                            >
+                                Delete
+                            </Button>
+                        </Box>
                     </Box>
                 </Fade>
             </Modal>

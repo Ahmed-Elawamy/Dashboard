@@ -55,7 +55,10 @@ function App() {
                         path="/"
                         element={<Navigate to="/dashboard" replace />}
                     />
-                    <Route path="/dashboard" element={<Dashboard isMobile={isMobile}/>} />
+                    <Route
+                        path="/dashboard"
+                        element={<Dashboard isMobile={isMobile} />}
+                    />
                     <Route
                         path="/students"
                         element={<Students isMobile={isMobile} open={open} />}
@@ -67,7 +70,10 @@ function App() {
                         path="/teachers"
                         element={<Teachers isMobile={isMobile} />}
                     />
-                    <Route path="/finance" element={<Finance />} />
+                    <Route
+                        path="/finance"
+                        element={<Finance isMobile={isMobile} />}
+                    />
                     <Route path="/settings" element={<Settings />} />
                     <Route path="*" element={<ErrorPage />} />
                 </Routes>

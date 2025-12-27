@@ -134,7 +134,7 @@ function Teachers({ isMobile }) {
                 {/* ============ */}
                 <Box
                     sx={{
-                        marginTop: "100px",
+                        marginTop: "43px",
                         borderRadius: "16px",
                         background: "white",
                         border: "1px solid #00000036",

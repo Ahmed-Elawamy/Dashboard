@@ -53,20 +53,6 @@ function Students({ isMobile, open }) {
                     </Typography>
                 </Box>
 
-                <Button
-                    onClick={handleAdd}
-                    variant="contained"
-                    startIcon={<AddOutlinedIcon />}
-                    sx={{
-                        background: "black",
-                        color: "white",
-                        padding: "10px 14px",
-                        borderRadius: "10px",
-                        mt: isMobile ? 2 : 0,
-                    }}
-                >
-                    Add Student
-                </Button>
             </Box>
             <Box
                 sx={{

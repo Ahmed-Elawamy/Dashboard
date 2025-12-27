@@ -2,16 +2,16 @@ import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import {
     Box,
-    Modal,
-    Fade,
-    Typography,
     Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
+    Typography,
     Button,
     useMediaQuery,
     useTheme,
+    Stack,
+    TextField,
 } from "@mui/material";
 import {
     Search as SearchIcon,
@@ -38,18 +38,26 @@ const SearchIconWrapper = styled("div")({
     alignItems: "center",
 });
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
+const StyledInputBase = styled(InputBase)({
     flex: 1,
-}));
+});
 
-export default function TableOfStudents({ rows, setRows, onEdit, isMobile }) {
+export default function TableOfStudents({ rows, setRows, onEdit }) {
     const [searchText, setSearchText] = React.useState("");
     const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
     const [studentToDelete, setStudentToDelete] = React.useState(null);
+
+    const [viewDialogOpen, setViewDialogOpen] = React.useState(false);
+    const [viewStudent, setViewStudent] = React.useState(null);
+
+    const [formDialogOpen, setFormDialogOpen] = React.useState(false);
+    const [formMode, setFormMode] = React.useState("add"); // add | edit
+    const [formStudent, setFormStudent] = React.useState(null);
+
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-    // فتح نافذة التأكيد
+    // ===== Handlers =====
     const handleDeleteClick = (row) => {
         setStudentToDelete(row);
         setDeleteDialogOpen(true);
@@ -61,11 +69,51 @@ export default function TableOfStudents({ rows, setRows, onEdit, isMobile }) {
         setStudentToDelete(null);
     };
 
-    const handleDeleteCancel = () => {
-        setDeleteDialogOpen(false);
-        setStudentToDelete(null);
+    const handleShow = (row) => {
+        setViewStudent(row);
+        setViewDialogOpen(true);
     };
 
+    const handleAdd = () => {
+        setFormMode("add");
+        setFormStudent({
+            name: "",
+            email: "",
+            rollNo: "",
+            class: "",
+            department: "",
+            status: "Active",
+            phone: "",
+            address: "",
+            gpa: "",
+        });
+        setFormDialogOpen(true);
+    };
+
+    const handleEdit = (row) => {
+        setFormMode("edit");
+        setFormStudent({ ...row });
+        setFormDialogOpen(true);
+    };
+
+    const handleFormChange = (field, value) => {
+        setFormStudent({ ...formStudent, [field]: value });
+    };
+
+    const handleFormSave = () => {
+        if (formMode === "add") {
+            setRows([...rows, { id: Date.now(), ...formStudent }]);
+        } else if (formMode === "edit") {
+            setRows(
+                rows.map((r) =>
+                    r.id === formStudent.id ? { ...formStudent } : r
+                )
+            );
+        }
+        setFormDialogOpen(false);
+    };
+
+    // ===== Columns =====
     const columns = React.useMemo(
         () => [
             {
@@ -73,19 +121,20 @@ export default function TableOfStudents({ rows, setRows, onEdit, isMobile }) {
                 headerName: "Logo",
                 width: 70,
                 renderCell: (params) => (
-                    <div
-                        style={{
-                            borderRadius: "50%",
+                    <Box
+                        sx={{
                             width: 40,
                             height: 40,
+                            borderRadius: "50%",
+                            bgcolor: "#ececf0",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            background: "#ececf0",
+                            fontWeight: 600,
                         }}
                     >
                         {params.row.initials}
-                    </div>
+                    </Box>
                 ),
             },
             { field: "name", headerName: "Name", width: 170 },
@@ -100,10 +149,9 @@ export default function TableOfStudents({ rows, setRows, onEdit, isMobile }) {
                 renderCell: (params) => (
                     <Box
                         sx={{
-                            borderRadius: 1,
-                            paddingX: 1,
-                            paddingY: 0.5,
-                            textAlign: "center",
+                            px: 1.5,
+                            py: 0.5,
+                            fontSize: 13,
                         }}
                     >
                         <span
@@ -128,31 +176,34 @@ export default function TableOfStudents({ rows, setRows, onEdit, isMobile }) {
             {
                 field: "actions",
                 headerName: "Actions",
-                width: 120,
+                width: 130,
                 sortable: false,
                 filterable: false,
                 renderCell: (params) => (
-                    <Box sx={{ display: "flex", gap: 1 }}>
+                    <Stack
+                        direction="row"
+                        spacing={1}
+                        alignItems="center"
+                        justifyContent="center"
+                        height="100%"
+                    >
                         <EditOutlined
-                            onClick={() => onEdit(params.row)}
+                            onClick={() => handleEdit(params.row)}
                             style={{ cursor: "pointer" }}
-                            title="Edit"
                         />
                         <VisibilityOutlined
-                            onClick={() => alert("Show student details")}
+                            onClick={() => handleShow(params.row)}
                             style={{ cursor: "pointer" }}
-                            title="View"
                         />
                         <DeleteOutlined
                             onClick={() => handleDeleteClick(params.row)}
                             style={{ cursor: "pointer", color: "red" }}
-                            title="Delete"
                         />
-                    </Box>
+                    </Stack>
                 ),
             },
         ],
-        [onEdit, rows]
+        [rows]
     );
 
     const filteredRows = React.useMemo(() => {
@@ -165,6 +216,7 @@ export default function TableOfStudents({ rows, setRows, onEdit, isMobile }) {
         );
     }, [rows, searchText]);
 
+    // ===== Render =====
     return (
         <Box sx={{ width: "100%" }}>
             <Search>
@@ -176,26 +228,118 @@ export default function TableOfStudents({ rows, setRows, onEdit, isMobile }) {
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)}
                 />
+                <Button variant="contained" sx={{ ml: 2 }} onClick={handleAdd}>
+                    Add Student
+                </Button>
             </Search>
 
-            <Box sx={{ height: 400, width: "100%" }}>
-                <DataGrid
-                    rows={filteredRows}
-                    columns={columns}
-                    pageSize={5}
-                    rowsPerPageOptions={[5, 10, 20]}
-                    autoHeight
-                    hideFooter={true}
-                />
-            </Box>
+            <DataGrid
+                rows={filteredRows}
+                columns={columns}
+                autoHeight
+                hideFooter
+                disableRowSelectionOnClick
+            />
+
+            {/* View Student Dialog */}
+            <Dialog
+                open={viewDialogOpen}
+                onClose={() => setViewDialogOpen(false)}
+                fullWidth
+                maxWidth="sm"
+            >
+                <DialogTitle>Student Details</DialogTitle>
+                <DialogContent>
+                    {viewStudent && (
+                        <Stack spacing={1.5} mt={1}>
+                            {Object.keys(viewStudent).map((key) => (
+                                <Typography key={key}>
+                                    <b>
+                                        {key.charAt(0).toUpperCase() +
+                                            key.slice(1)}
+                                        :
+                                    </b>{" "}
+                                    {viewStudent[key]}
+                                </Typography>
+                            ))}
+                        </Stack>
+                    )}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setViewDialogOpen(false)}>
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            {/* Add/Edit Student Dialog */}
+            <Dialog
+                open={formDialogOpen}
+                onClose={() => setFormDialogOpen(false)}
+                fullWidth
+                maxWidth="sm"
+            >
+                <DialogTitle>
+                    {formMode === "add" ? "Add Student" : "Edit Student"}
+                </DialogTitle>
+                <DialogContent>
+                    {formStudent && (
+                        <Stack spacing={1.5} mt={1}>
+                            {[
+                                "name",
+                                "email",
+                                "rollNo",
+                                "class",
+                                "department",
+                                "status",
+                                "phone",
+                                "address",
+                                "gpa",
+                            ].map((f) => (
+                                <TextField
+                                    key={f}
+                                    label={
+                                        f.charAt(0).toUpperCase() + f.slice(1)
+                                    }
+                                    value={formStudent[f]}
+                                    onChange={(e) =>
+                                        handleFormChange(f, e.target.value)
+                                    }
+                                    fullWidth
+                                    required
+                                />
+                            ))}
+                        </Stack>
+                    )}
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        onClick={handleFormSave}
+                        variant="contained"
+                        disabled={
+                            formStudent &&
+                            Object.values(formStudent).some(
+                                (v) => v === "" || v === null
+                            )
+                        }
+                    >
+                        Save
+                    </Button>
+                    <Button
+                        onClick={() => setFormDialogOpen(false)}
+                        variant="outlined"
+                    >
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
 
             {/* Delete Confirmation Dialog */}
             <Dialog
                 open={deleteDialogOpen}
-                onClose={handleDeleteCancel}
+                onClose={() => setDeleteDialogOpen(false)}
                 fullWidth
                 maxWidth="xs"
-                fullScreen={fullScreen}
             >
                 <DialogTitle>Delete Student</DialogTitle>
                 <DialogContent>
@@ -205,7 +349,9 @@ export default function TableOfStudents({ rows, setRows, onEdit, isMobile }) {
                     </Typography>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleDeleteCancel}>Cancel</Button>
+                    <Button onClick={() => setDeleteDialogOpen(false)}>
+                        Cancel
+                    </Button>
                     <Button
                         onClick={handleDeleteConfirm}
                         color="error"

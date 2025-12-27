@@ -18,7 +18,7 @@ import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import TrendingUpOutlinedIcon from "@mui/icons-material/TrendingUpOutlined";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 
-function Finance() {
+function Finance({ isMobile }) {
     const [rows, setRows] = React.useState(DataFinance);
     const cards = [
         {
@@ -163,7 +163,7 @@ function Finance() {
                         gap: 3,
                         justifyContent: "center",
                         mt: 2,
-                        margin: "40px 0"
+                        margin: "40px 0",
                     }}
                 >
                     {cards.map((item, index) => (
@@ -215,7 +215,11 @@ function Finance() {
                 </Box>
                 {/* ========= End Boxes ========== */}
 
-                <TableOfFinance rows={rows} setRows={setRows} />
+                <TableOfFinance
+                    rows={rows}
+                    setRows={setRows}
+                    isMobile={isMobile}
+                />
             </Container>
         </>
     );

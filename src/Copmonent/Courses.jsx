@@ -192,7 +192,7 @@ function Courses() {
                 />
             </Search>
 
-            <Container maxWidth="lg" sx={{ pt: 5 }} >
+            <Container maxWidth="lg" sx={{ pt: 5 }}>
                 <Grid
                     container
                     spacing={2}
@@ -204,12 +204,18 @@ function Courses() {
                         // gap: "50px",
                         // gap: "20px",
                         display: "flex",
-                       justifyContent: "center"
+                        justifyContent: "center",
                     }}
                 >
                     {filterdCourseSearch.map((course) => {
                         return (
-                            <Grid container xs={12} sm={6} md={3} key={course.id}>
+                            <Grid
+                                container
+                                xs={12}
+                                sm={6}
+                                md={3}
+                                key={course.id}
+                            >
                                 <Card
                                     key={course.id}
                                     sx={{
@@ -217,7 +223,7 @@ function Courses() {
                                         marginTop: "40px",
                                         padding: "19px 11px",
                                         borderRadius: "15px",
-                                        minWidth: "334px",
+                                        // minWidth: "334px",
                                         height: " 90%",
                                     }}
                                 >
@@ -297,7 +303,13 @@ function Courses() {
                                         <AccessTimeOutlinedIcon />
                                         {course.duration_weeks} weeks
                                     </div>
-                                    <hr style={{ color: "#d4d4d431" }} />
+                                    <hr
+                                        style={{
+                                            borderStyle: "ridge",
+                                            borderColor: "none",
+                                            color: "#e5e5e5",
+                                        }}
+                                    />
                                     <div style={{ color: "#776c6cff" }}>
                                         Teacher{" "}
                                     </div>
@@ -326,7 +338,9 @@ function Courses() {
                                         {course.department}
                                     </div>
 
-                                    <CardActions>
+                                    <CardActions
+                                        sx={{ justifyContent: "center" }}
+                                    >
                                         <IconButton
                                             onClick={() => handleShow(course)}
                                             sx={{
@@ -335,12 +349,14 @@ function Courses() {
                                                 borderRadius: "14px",
                                                 padding: "10px 9px",
                                                 fontSize: "18px",
-                                                border: "1px solid rgb(206, 201, 201)",
+                                                border: "1px solid  #e5e5e5",
                                                 marginRight: "10px",
                                                 "&:hover": {
+                                                    // background:
+                                                    //     "#007fff !important",
                                                     background:
-                                                        "#007fff !important",
-                                                    color: "white",
+                                                        "#e5e5e5 !important",
+                                                    color: "black",
                                                 },
                                             }}
                                             aria-label="View Details"
