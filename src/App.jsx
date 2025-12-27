@@ -16,8 +16,8 @@ import ErrorPage from "./Pages/ErrorPage";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
-const DRAWER_OPEN = 300;
-const DRAWER_CLOSED = 100;
+const DRAWER_OPEN = 240; // خليه أصغر شوية للموبايل
+const DRAWER_CLOSED = 60; // خليه minimal
 
 function App() {
     const [open, setOpen] = useState(true);
@@ -28,8 +28,8 @@ function App() {
         <Box
             sx={{
                 display: "flex",
+                flexDirection: isMobile ? "column" : "row", // لو موبايل خليها column
                 minHeight: "100vh",
-                // width: "100vh",
             }}
         >
             <Sidebar open={open} setOpen={setOpen} isMobile={isMobile} />
@@ -37,14 +37,17 @@ function App() {
                 component="main"
                 sx={{
                     flexGrow: 1,
-                    ml: open ? `${DRAWER_OPEN}px` : `${DRAWER_CLOSED}px`,
-                    // ml: "100px",
+                    ml: isMobile
+                        ? 0
+                        : open
+                        ? `${DRAWER_OPEN}px`
+                        : `${DRAWER_CLOSED}px`, // إزالة الهامش على الموبايل
+                    mt: isMobile ? `${DRAWER_CLOSED}px` : 0, // لو تحب تحط مساحة فوق للـ Sidebar على الموبايل
                     p: { xs: 2, sm: 3 },
-                    transition: (theme) =>
-                        theme.transitions.create("margin", {
-                            easing: theme.transitions.easing.sharp,
-                            duration: theme.transitions.duration.standard,
-                        }),
+                    transition: theme.transitions.create(["margin", "width"], {
+                        easing: theme.transitions.easing.sharp,
+                        duration: theme.transitions.duration.standard,
+                    }),
                 }}
             >
                 <Routes>
@@ -52,8 +55,7 @@ function App() {
                         path="/"
                         element={<Navigate to="/dashboard" replace />}
                     />
-
-                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/dashboard" element={<Dashboard isMobile={isMobile}/>} />
                     <Route
                         path="/students"
                         element={<Students isMobile={isMobile} open={open} />}
@@ -62,12 +64,11 @@ function App() {
                     <Route path="/attendance" element={<Attendance />} />
                     <Route path="/grades" element={<Grades />} />
                     <Route
-                        path="/techers"
+                        path="/teachers"
                         element={<Teachers isMobile={isMobile} />}
                     />
                     <Route path="/finance" element={<Finance />} />
                     <Route path="/settings" element={<Settings />} />
-
                     <Route path="*" element={<ErrorPage />} />
                 </Routes>
             </Box>

@@ -8,7 +8,7 @@ import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import StudentsChart from "./StudentsChart ";
 import MaterialChart from "./MaterialChart";
 
-function Dashboard() {
+function Dashboard({isMobile}) {
     const cards = [
         {
             title: "Total Students",
@@ -52,19 +52,19 @@ function Dashboard() {
 
     return (
         <>
-            <Typography
-                variant="h5"
-                sx={{ textAlign: "left", fontWeight: 600 }}
-            >
-                Dashboard
-            </Typography>
-            <Typography
-                variant="h6"
-                sx={{ textAlign: "left", fontWeight: 300 }}
-            >
-                Welcome to your student management system
-            </Typography>
-            <Container maxWidth="lg" sx={{ pt: 5 }}>
+            <Container maxWidth="xlg">
+                <Typography
+                    variant="h5"
+                    sx={{ textAlign: "left", fontWeight: 600 }}
+                >
+                    Dashboard
+                </Typography>
+                <Typography
+                    variant="h6"
+                    sx={{ textAlign: "left", fontWeight: 300 }}
+                >
+                    Welcome to your student management system
+                </Typography>
                 <Box
                     sx={{
                         display: "flex",
@@ -72,9 +72,11 @@ function Dashboard() {
                         gap: 3,
                         justifyContent: "center",
                         mt: 2,
+                        pt: { xs: 2, sm: 3, md: 5 },
+                        px: { xs: 1, sm: 2, md: 3 },
+                        
                     }}
                 >
-                    
                     {cards.map((item, index) => (
                         <Card
                             key={index}
@@ -132,10 +134,10 @@ function Dashboard() {
                     }}
                 >
                     <Box sx={{ flex: "1 1 300px", maxWidth: 600 }}>
-                        <StudentsChart />
+                        <StudentsChart isMobile={isMobile}/>
                     </Box>
                     <Box sx={{ flex: "1 1 300px", maxWidth: 600 }}>
-                        <MaterialChart />
+                        <MaterialChart isMobile={isMobile}/>
                     </Box>
                 </Box>
             </Container>

@@ -1,10 +1,9 @@
+// Students.jsx
 import * as React from "react";
-import { Typography, Container } from "@mui/material";
-import Button from "@mui/material/Button";
+import { Typography, Container, Box, Button } from "@mui/material";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import Box from "@mui/material/Box";
 
-// Component
+// Components
 import TableOfStudents from "./TableOfStudents.jsx";
 import StudentDialog from "./StudentDialog.jsx";
 
@@ -13,15 +12,17 @@ import studentData from "../Data.json";
 function Students({ isMobile, open }) {
     const [openDialog, setOpenDialog] = React.useState(false);
     const [rows, setRows] = React.useState(studentData);
-    const [mode, setMode] = React.useState("add"); // add | edit
+    const [mode, setMode] = React.useState("add");
     const [selectedStudent, setSelectedStudent] = React.useState(null);
     const [editStudentData, setEditStudentData] = React.useState({});
+
     const handleAdd = () => {
         setMode("add");
         setEditStudentData({});
         setSelectedStudent(null);
         setOpenDialog(true);
     };
+
     const handleEdit = (row) => {
         setMode("edit");
         setSelectedStudent(row);
@@ -29,36 +30,29 @@ function Students({ isMobile, open }) {
         setOpenDialog(true);
     };
 
-    // maxWidth={isMobile === true ? "sm" : "md"}
-    // open ? (isPhone ? "sm" : "sm") : (isPhone ? "sm" : "lg")
     return (
         <Container
-            maxWidth={open ? isMobile ? "sm" : "md" : isMobile ? "sm" : "md"}
+            maxWidth={open ? (isMobile ? "sm" : "md") : isMobile ? "sm" : "lg"}
             sx={{ pt: 5 }}
         >
-            <div
-                style={{
+            <Box
+                sx={{
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
                     flexWrap: "wrap",
-                    margin: "0 0 25px 0",
+                    mb: 3,
                 }}
             >
-                <div>
-                    <Typography
-                        variant="h5"
-                        sx={{ textAlign: "left", fontWeight: "600" }}
-                    >
+                <Box>
+                    <Typography variant="h5" sx={{ fontWeight: 600 }}>
                         Students
                     </Typography>
-                    <Typography
-                        variant="h6"
-                        sx={{ textAlign: "left", fontWeight: "300" }}
-                    >
+                    <Typography variant="h6" sx={{ fontWeight: 300 }}>
                         Manage student information and records
                     </Typography>
-                </div>
+                </Box>
+
                 <Button
                     onClick={handleAdd}
                     variant="contained"
@@ -68,37 +62,43 @@ function Students({ isMobile, open }) {
                         color: "white",
                         padding: "10px 14px",
                         borderRadius: "10px",
+                        mt: isMobile ? 2 : 0,
                     }}
                 >
                     Add Student
                 </Button>
-            </div>
+            </Box>
             <Box
-                component="section"
                 sx={{
-                    p: 30,
                     borderRadius: "16px",
                     background: "white",
                     border: "1px solid #00000036",
-                    position: "relative",
-                    padding: "30px",
-                    width: isMobile ? "74%" : "100%",
+                    p: 3,
+                    // width: "100%",
+                    overflowX: "auto", // دي مهمة عشان تظهر scroll أفقي بدل التمدد اللا نهائي
                 }}
             >
-                <TableOfStudents
-                    isMobile={isMobile}
-                    rows={rows}
-                    setRows={setRows}
-                    onEdit={handleEdit}
-                    setEditStudentData={setEditStudentData}
-                    setSelectedStudent={setSelectedStudent}
-                />
+                <Box
+                    sx={{
+                        maxWidth: {
+                            xs: "600px", // موبايل
+                            sm: "800px", // تابليت
+                            md: "1042px", // كمبيوتر
+                        },
+                    }}
+                >
+                    <TableOfStudents
+                        isMobile={isMobile}
+                        rows={rows}
+                        setRows={setRows}
+                        onEdit={handleEdit}
+                    />
+                </Box>
             </Box>
+
             <StudentDialog
                 open={openDialog}
-                onClose={() => {
-                    setOpenDialog(false);
-                }}
+                onClose={() => setOpenDialog(false)}
                 mode={mode}
                 selectedStudent={selectedStudent}
                 editStudentData={editStudentData}

@@ -221,9 +221,9 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
     return (
         <>
             <Box
-                sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}
+                sx={{ display: "flex", justifyContent: "space-around",flexWrap: "wrap", mb: 2 }}
             >
-                <Search>
+                <Search sx={{width: isMobile ? "100%": "auto%"}}>
                     <SearchIcon />
                     <StyledInputBase
                         placeholder="Search by name, email, subject or department…"

@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import Chart from "react-apexcharts";
 
-export default function StudentsChart() {
+export default function StudentsChart({isMobile}) {
     const data = [200, 250, 300, 280, 280];
     const categories = ["Sep", "Oct", "Nov", "Dec", "Jan"];
 
@@ -19,7 +19,7 @@ export default function StudentsChart() {
     return (
         <Box
             sx={{
-                width: "100%",
+                width: isMobile ?  "80%" : "89%",
                 height: { xs: 300, md: 400 },
                 mt: 4,
                 background: "white",

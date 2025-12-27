@@ -131,7 +131,43 @@ function Teachers({ isMobile }) {
                 </Container>
                 {/* ========= End Boxes ========== */}
 
+                {/* ============ */}
                 <Box
+                    sx={{
+                        marginTop: "100px",
+                        borderRadius: "16px",
+                        background: "white",
+                        border: "1px solid #00000036",
+                        p: 3,
+                        // width: "100%",
+                        overflowX: "auto", // دي مهمة عشان تظهر scroll أفقي بدل التمدد اللا نهائي
+                    }}
+                >
+                    <Box
+                        sx={{
+                            maxWidth: {
+                                xs: "600px", // موبايل
+                                sm: "800px", // تابليت
+                                md: "1042px", // كمبيوتر
+                            },
+                        }}
+                    >
+                        <TableOfTeachers
+                            isMobile={isMobile}
+                            rows={rows}
+                            setRows={setRows}
+                            openModal={openModal}
+                            setOpenModal={setOpenModal}
+                            mode={mode}
+                            setMode={setMode}
+                            selectedTeacher={selectedTeacher}
+                            setSelectedTeacher={setSelectedTeacher}
+                        />
+                    </Box>
+                </Box>
+                {/* ============ */}
+
+                {/* <Box
                     sx={{
                         mt: 2,
                         p: 3,
@@ -152,7 +188,7 @@ function Teachers({ isMobile }) {
                         selectedTeacher={selectedTeacher}
                         setSelectedTeacher={setSelectedTeacher}
                     />
-                </Box>
+                </Box> */}
             </Container>
         </>
     );

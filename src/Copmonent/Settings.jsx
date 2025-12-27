@@ -104,27 +104,27 @@ function Settings() {
     };
     return (
         <div>
-            <Typography
-                variant="h5"
-                sx={{ textAlign: "left", fontWeight: "600" }}
-            >
-                Settings
-            </Typography>
-            <Typography
-                variant="h6"
-                sx={{ textAlign: "left", fontWeight: "300" }}
-            >
-                Manage system preferences and configurations
-            </Typography>
-            <Container
-                maxWidth="xlg"
-                sx={{
-                    pt: { xs: 2, sm: 3, md: 5 },
-                    px: { xs: 1, sm: 2, md: 3 },
-                }}
-            >
+            <Container maxWidth="xlg">
+                <Typography
+                    variant="h5"
+                    sx={{ textAlign: "left", fontWeight: "600" }}
+                >
+                    Settings
+                </Typography>
+                <Typography
+                    variant="h6"
+                    sx={{ textAlign: "left", fontWeight: "300" }}
+                >
+                    Manage system preferences and configurations
+                </Typography>
 
-                <Box sx={{ width: "100%" }}>
+                <Box
+                    sx={{
+                        width: "100%",
+                        pt: { xs: 2, sm: 3, md: 5 },
+                        px: { xs: 1, sm: 2, md: 3 },
+                    }}
+                >
                     <Box sx={{ bgcolor: "#fff" }}>
                         <AntTabs
                             value={value}

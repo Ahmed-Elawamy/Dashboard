@@ -2,17 +2,14 @@ import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
-import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -46,20 +43,9 @@ const closedMixin = (theme) => ({
     overflowX: "hidden",
 });
 
-const AppBar = styled(MuiAppBar)(({ theme }) => ({
-    zIndex: theme.zIndex.drawer + 1,
-    background: "transparent",
-    boxShadow: "none",
-    color: "black",
-}));
-
 export default function Sidebar({ open, setOpen, isMobile }) {
     const theme = useTheme();
     const location = useLocation();
-
-    React.useEffect(() => {
-        if (isMobile) setOpen(false);
-    }, [isMobile]);
 
     const menuItems = [
         { text: "Dashboard", icon: <DashboardIcon />, path: "/dashboard" },
@@ -71,49 +57,49 @@ export default function Sidebar({ open, setOpen, isMobile }) {
             path: "/attendance",
         },
         { text: "Grades", icon: <GradeIcon />, path: "/grades" },
-        { text: "Teachers", icon: <SchoolIcon />, path: "/techers" },
+        { text: "Teachers", icon: <SchoolIcon />, path: "/teachers" },
         { text: "Finance", icon: <AttachMoneyIcon />, path: "/finance" },
         { text: "Settings", icon: <SettingsIcon />, path: "/settings" },
     ];
 
     return (
-        <Box sx={{ display: "flex" }}>
-            <CssBaseline />
-
-            {/* AppBar */}
-            {/* <AppBar position="fixed">
-                <Toolbar sx={{ minHeight: 56 }}>
-                    <IconButton onClick={() => setOpen(!open)}>
-                        <MenuIcon />
-                    </IconButton>
-                </Toolbar>
-            </AppBar> */}
+        <Box>
+            {/* زرار Menu على الموبايل */}
+            {isMobile && (
+                <IconButton
+                    onClick={() => setOpen(true)}
+                    sx={{
+                        position: "fixed",
+                        top: 16,
+                        left: 16,
+                        zIndex: theme.zIndex.drawer + 2,
+                        bgcolor: "#fff",
+                        boxShadow: 1,
+                        display: open ? "none" : "flex",
+                    }}
+                >
+                    <MenuIcon />
+                </IconButton>
+            )}
 
             {/* Drawer */}
             <MuiDrawer
-                // variant={isMobile ? "temporary" : "permanent"}
-                variant="permanent"
+                variant={isMobile ? "temporary" : "permanent"}
                 open={open}
                 onClose={() => setOpen(false)}
                 ModalProps={{ keepMounted: true }}
                 sx={{
-                    ...(isMobile
-                        ? {
-                              "& .MuiDrawer-paper": {
-                                  // width: DRAWER_OPEN,
-                                  //   width: DRAWER_CLOSED,
-                                  width: open ? DRAWER_OPEN : DRAWER_CLOSED,
-                              },
-                          }
-                        : open
-                        ? {
-                              "& .MuiDrawer-paper": openedMixin(theme),
-                          }
-                        : {
-                              "& .MuiDrawer-paper": closedMixin(theme),
-                          }),
+                    "& .MuiDrawer-paper": {
+                        boxSizing: "border-box",
+                        ...(isMobile
+                            ? { width: DRAWER_OPEN }
+                            : open
+                            ? openedMixin(theme)
+                            : closedMixin(theme)),
+                    },
                 }}
             >
+                {/* Header */}
                 <Box
                     sx={{
                         display: "flex",
@@ -147,23 +133,22 @@ export default function Sidebar({ open, setOpen, isMobile }) {
                         </Box>
                     )}
 
-                    {/* {!isMobile && open && ( */}
-                    <IconButton
-                        sx={{ ml: "auto" }}
-                        onClick={() => setOpen(!open)}
-                    >
-                        {open ? <ChevronLeftIcon /> : <MenuIcon />}
-                        {/*  */}
-                    </IconButton>
-                    {/* )} */}
+                    {!isMobile && (
+                        <IconButton
+                            sx={{ ml: "auto" }}
+                            onClick={() => setOpen(!open)}
+                        >
+                            {open ? <ChevronLeftIcon /> : <MenuIcon />}
+                        </IconButton>
+                    )}
                 </Box>
 
                 <Divider />
 
+                {/* Menu Items */}
                 <List sx={{ px: 1 }}>
                     {menuItems.map((item) => {
                         const active = location.pathname === item.path;
-
                         return (
                             <ListItem key={item.text} disablePadding>
                                 <ListItemButton
@@ -193,7 +178,6 @@ export default function Sidebar({ open, setOpen, isMobile }) {
                                     >
                                         {item.icon}
                                     </ListItemIcon>
-
                                     <ListItemText
                                         primary={item.text}
                                         sx={{ opacity: open ? 1 : 0 }}

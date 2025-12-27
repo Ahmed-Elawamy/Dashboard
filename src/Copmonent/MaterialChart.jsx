@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import Chart from "react-apexcharts";
 
-export default function MaterialChart() {
+export default function MaterialChart({isMobile}) {
     const series = [35, 13, 33, 53];
     const labels = ["Science", "Math", "C++", "Java"];
 
@@ -18,7 +18,8 @@ export default function MaterialChart() {
     return (
         <Box
             sx={{
-                width: "100%",
+                width: isMobile ? "80%" : "89%",
+
                 height: { xs: 300, md: 400 },
                 mt: 4,
                 background: "white",
