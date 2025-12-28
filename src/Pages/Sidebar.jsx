@@ -61,7 +61,6 @@ export default function Sidebar({ open, setOpen, isMobile }) {
         { text: "Teachers", icon: <SchoolIcon />, path: "/teachers" },
         { text: "Finance", icon: <AttachMoneyIcon />, path: "/finance" },
         { text: "Settings", icon: <SettingsIcon />, path: "/settings" },
-        { text: "Login", icon: <Login />, path: "/login" },
     ];
 
     return (
