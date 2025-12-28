@@ -22,7 +22,7 @@ const DRAWER_OPEN = 240; // خليه أصغر شوية للموبايل
 const DRAWER_CLOSED = 60; // خليه minimal
 
 function App() {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
