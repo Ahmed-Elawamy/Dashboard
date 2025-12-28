@@ -19,6 +19,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
+import toast from "react-hot-toast";
 
 import {
     AddOutlined as AddOutlinedIcon,
@@ -132,6 +133,7 @@ function Courses() {
         setCoursesData(updated);
         setDeleteDialogOpen(false);
         setCourseToDelete(null);
+        toast.success("Course Deleted successfully");
     };
 
     const handleDeleteCancel = () => {

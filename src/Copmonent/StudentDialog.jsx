@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { forwardRef } from "react";
 import React from "react";
+import toast from "react-hot-toast";
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -47,6 +48,7 @@ function StudentDialog({
                 ...editStudentData,
             };
             setRows([...rows, newStudent]);
+            toast.success("Students Added successfully");
         } else {
             const updated = rows.map((row) =>
                 row.id === selectedStudent.id
@@ -56,6 +58,7 @@ function StudentDialog({
             setRows(updated);
         }
         onClose();
+        toast.success("Students Editing successfully");
     };
 
     return (

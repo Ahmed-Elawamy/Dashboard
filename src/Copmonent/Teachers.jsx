@@ -148,7 +148,7 @@ function Teachers({ isMobile }) {
                             maxWidth: {
                                 xs: "600px", // موبايل
                                 sm: "800px", // تابليت
-                                md: "1042px", // كمبيوتر
+                                md: "1105px", // كمبيوتر
                             },
                         }}
                     >

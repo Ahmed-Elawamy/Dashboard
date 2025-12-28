@@ -6,6 +6,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Container, Grid, Typography, Card, Button } from "@mui/material";
+import toast from "react-hot-toast";
+
 
 import AttendanceData from "../../attendanceData.json";
 import TableOfAttendance from "./TableOfAttendance";
@@ -287,6 +289,7 @@ function Attendance() {
                         </FormControl>
 
                         <Button
+                            onClick={() => toast.success("Saved successfully")}
                             variant="contained"
                             sx={{
                                 background: "black",

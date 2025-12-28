@@ -17,6 +17,7 @@ import {
 } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
+import toast from "react-hot-toast";
 
 /* ===== Styles ===== */
 
@@ -104,6 +105,7 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
         });
         setDeleteDialogOpen(false);
         setTeacherToDelete(null);
+        toast.success("Teacher Deleted successfully");
     };
 
     const handleSave = () => {
@@ -114,11 +116,13 @@ export default function TableOfTeachers({ rows, setRows, isMobile }) {
                     t.id === formData.id ? formData : t
                 ),
             });
+            toast.success("Teacher Information Edited successfully");
         } else if (mode === "add") {
             setRows({
                 ...rows,
                 teachers: [...teachers, formData],
             });
+            toast.success("Teacher Added successfully");
         }
         setOpen(false);
     };

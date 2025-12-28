@@ -22,7 +22,7 @@ function Students({ isMobile, open }) {
         setSelectedStudent(null);
         setOpenDialog(true);
     };
-
+    
     const handleEdit = (row) => {
         setMode("edit");
         setSelectedStudent(row);

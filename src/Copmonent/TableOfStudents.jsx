@@ -21,6 +21,7 @@ import {
 } from "@mui/icons-material";
 import InputBase from "@mui/material/InputBase";
 import { styled } from "@mui/material/styles";
+import toast from "react-hot-toast";
 
 // ===== Styled Search =====
 const Search = styled("div")(({ theme }) => ({
@@ -67,6 +68,7 @@ export default function TableOfStudents({ rows, setRows, onEdit }) {
         setRows(rows.filter((r) => r.id !== studentToDelete.id));
         setDeleteDialogOpen(false);
         setStudentToDelete(null);
+        toast.success("Student Deleted Successfully");
     };
 
     const handleShow = (row) => {
@@ -103,12 +105,14 @@ export default function TableOfStudents({ rows, setRows, onEdit }) {
     const handleFormSave = () => {
         if (formMode === "add") {
             setRows([...rows, { id: Date.now(), ...formStudent }]);
+            toast.success("Student Added Successfully");
         } else if (formMode === "edit") {
             setRows(
                 rows.map((r) =>
                     r.id === formStudent.id ? { ...formStudent } : r
                 )
             );
+            toast.success("Student Editing Successfully");
         }
         setFormDialogOpen(false);
     };

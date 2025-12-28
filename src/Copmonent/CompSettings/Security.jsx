@@ -14,6 +14,7 @@ import {
     createTheme,
     ThemeProvider,
 } from "@mui/material";
+import toast from "react-hot-toast";
 
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -63,6 +64,28 @@ function Security() {
         },
     });
 
+    // Password Handling
+    const updatePassword = () => {
+        if (
+            passwords.current != "" &&
+            passwords.confirm != "" &&
+            passwords.confirm === passwords.new
+        ) {
+            toast.success("Pasword was Changed successfully");
+        } else if (
+            passwords.current === "" ||
+            passwords.confirm === "" ||
+            passwords.new === ""
+        ) {
+            toast.error("Some Input Is Empty");
+        } else if (passwords.confirm !== passwords.new) {
+            toast.error(
+                "New Password Input Not Eqal To Confirm Password Input"
+            );
+        } else {
+            toast.error("Invalid Inputs, Please Try Again");
+        }
+    };
     return (
         <ThemeProvider theme={theme}>
             {/* ================= Password Section ================= */}
@@ -140,6 +163,7 @@ function Security() {
                     sx={{ mt: 4, display: "flex", justifyContent: "flex-end" }}
                 >
                     <Button
+                        onClick={() => updatePassword()} // toast.success("Saved successfully")
                         variant="contained"
                         size="large"
                         sx={{ textTransform: "none", fontWeight: 600 }}
@@ -206,6 +230,7 @@ function Security() {
                     sx={{ mt: 4, display: "flex", justifyContent: "flex-end" }}
                 >
                     <Button
+                        onClick={() => toast.success("Saved successfully")}
                         variant="contained"
                         size="large"
                         sx={{ textTransform: "none", fontWeight: 600 }}

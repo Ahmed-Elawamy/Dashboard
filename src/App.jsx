@@ -15,6 +15,9 @@ import Settings from "./Copmonent/Settings";
 import ErrorPage from "./Pages/ErrorPage";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import { Toaster } from "react-hot-toast";
+import Login from "./Pages/Login.jsx";
+import Signup from "./Pages/Signup.jsx";
 
 const DRAWER_OPEN = 240; // خليه أصغر شوية للموبايل
 const DRAWER_CLOSED = 60; // خليه minimal
@@ -32,6 +35,15 @@ function App() {
                 minHeight: "100vh",
             }}
         >
+            <Toaster
+                position="bottom-right"
+                toastOptions={{
+                    duration: 3000,
+                    style: {
+                        fontSize: "14px",
+                    },
+                }}
+            />
             <Sidebar open={open} setOpen={setOpen} isMobile={isMobile} />
             <Box
                 component="main"
@@ -75,6 +87,8 @@ function App() {
                         element={<Finance isMobile={isMobile} />}
                     />
                     <Route path="/settings" element={<Settings />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
                     <Route path="*" element={<ErrorPage />} />
                 </Routes>
             </Box>

@@ -13,6 +13,7 @@ import {
     createTheme,
     ThemeProvider,
 } from "@mui/material";
+import toast from "react-hot-toast";
 
 function General() {
     const [general, setGeneral] = React.useState({
@@ -161,6 +162,7 @@ function General() {
                     }}
                 >
                     <Button
+                        onClick={() => toast.success("Saved successfully")}
                         variant="contained"
                         color="primary"
                         size="large"

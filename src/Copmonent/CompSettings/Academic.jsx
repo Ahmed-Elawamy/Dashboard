@@ -7,12 +7,12 @@ import {
     Button,
     Paper,
     FormControl,
-    InputLabel,
     MenuItem,
     Select,
     createTheme,
     ThemeProvider,
 } from "@mui/material";
+import toast from "react-hot-toast";
 
 function Academic() {
     const [general, setGeneral] = React.useState({
@@ -121,6 +121,7 @@ function Academic() {
                     }}
                 >
                     <Button
+                        onClick={() => toast.success("Saved successfully")}
                         variant="contained"
                         color="primary"
                         size="large"
