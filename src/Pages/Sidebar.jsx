@@ -21,6 +21,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import SettingsIcon from "@mui/icons-material/Settings";
 import GradeIcon from "@mui/icons-material/Grade";
 import { Link, useLocation } from "react-router-dom";
+import { Login } from "@mui/icons-material";
 
 const DRAWER_OPEN = 280;
 const DRAWER_CLOSED = 72;
@@ -60,6 +61,7 @@ export default function Sidebar({ open, setOpen, isMobile }) {
         { text: "Teachers", icon: <SchoolIcon />, path: "/teachers" },
         { text: "Finance", icon: <AttachMoneyIcon />, path: "/finance" },
         { text: "Settings", icon: <SettingsIcon />, path: "/settings" },
+        { text: "Login", icon: <Login />, path: "/login" },
     ];
 
     return (
