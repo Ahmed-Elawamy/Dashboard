@@ -2,7 +2,6 @@ import "./App.css";
 import { Box } from "@mui/material";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useState } from "react";
-import { Analytics } from "@vercel/analytics/next";
 import Sidebar from "./Pages/Sidebar.jsx";
 import Dashboard from "./Copmonent/Dashboard";
 import Students from "./Copmonent/Students";
